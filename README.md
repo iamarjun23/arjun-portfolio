@@ -3,7 +3,7 @@
 Next.js 16 (App Router) rebuild of `../arjun-portfolio-responsive.html`, kept as a
 reference of the original single-file version.
 
-Stack: Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · `next/font` (self-hosted Geist).
+Stack: Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · `next/font` (self-hosted Inter + Geist Mono).
 
 ## Run
 

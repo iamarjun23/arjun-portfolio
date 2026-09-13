@@ -12,7 +12,7 @@
   --color-brand2: #72e6f5;
   --color-wash: rgba(32, 211, 238, 0.1);
 
-  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-inter-sans), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
 }
 
