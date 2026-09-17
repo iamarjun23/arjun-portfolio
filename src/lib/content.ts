@@ -38,7 +38,10 @@ export const hero = {
     kicker: "FEATURED PROJECT",
     title: "Construction Ops Multi-Agent System",
     blurb:
-      "A supervisor-based multi-agent RAG system with domain-specialist agents, an audit agent that verifies every claim against evidence, and zone-based access control enforced at the tool layer.",
+      "Three domain agents retrieve through typed, access-controlled tools; an audit agent verifies every claim against its evidence before it ships.",
+    // Explains what the overlaps in the hero diagram actually mean.
+    diagramNote:
+      "Each circle is what one agent can answer alone. Overlaps are questions that need more than one — the supervisor splits those and merges the evidence.",
     tags: ["Personal project", "Multi-agent architecture"],
   },
 } as const;

@@ -1,9 +1,12 @@
 import Image from "next/image";
 import { hero, site } from "@/lib/content";
 
+/** Square panel matching the source photo's aspect, so the portrait is shown
+ * whole — never cropped and never letterboxed. Capped against viewport height
+ * so it still fits a single screen on short windows. */
 function PhotoPanel() {
   return (
-    <div className="relative aspect-square max-h-[min(380px,44vh)] w-full overflow-hidden bg-[linear-gradient(160deg,#20d3ee_0%,#087d8f_100%)] lg:aspect-auto lg:max-h-none lg:min-h-0 lg:flex-1">
+    <div className="relative mx-auto aspect-square w-full max-w-[min(100%,58vh)] overflow-hidden bg-s1">
       {site.photo ? (
         <Image
           src={site.photo}
@@ -12,24 +15,23 @@ function PhotoPanel() {
           preload
           unoptimized
           sizes="(max-width: 1024px) 100vw, 30vw"
-          className="object-cover object-[50%_28%]"
+          className="object-cover"
         />
       ) : (
-        <>
-          <span className="absolute left-6 top-6 font-mono text-[11px] tracking-[0.08em] text-white/70">
-            YOUR PHOTO
-          </span>
-          <div className="grid h-[310px] w-[210px] max-h-[70%] place-items-center rounded-t-[106px] border border-dashed border-[rgba(244,245,248,0.65)] bg-[linear-gradient(150deg,rgba(244,245,248,0.75),rgba(244,245,248,0.23))] font-mono text-xs text-[rgba(244,245,248,0.88)]">
+        <div className="grid h-full w-full place-items-center bg-[linear-gradient(160deg,#20d3ee_0%,#087d8f_100%)]">
+          <span className="font-mono text-xs text-[rgba(244,245,248,0.88)]">
             PHOTO PLACEHOLDER
-          </div>
-        </>
+          </span>
+        </div>
       )}
     </div>
   );
 }
 
-/** The featured project at a glance: three domain specialists, their shared
- * ground in the middle, and the audit layer that wraps every answer. */
+/** Coverage map for the featured project: each circle is what one specialist
+ * agent can answer on its own, overlaps are questions that need more than one
+ * (the supervisor's job), and the dashed ring is the audit pass every answer
+ * goes through. The caption under it spells this out. */
 function AgentVenn() {
   const circles = [
     { cx: 120, cy: 142, label: "PAYMENT", lx: 93, ly: 116 },
@@ -41,7 +43,7 @@ function AgentVenn() {
     <svg
       viewBox="0 0 320 320"
       role="img"
-      aria-label="Three specialist agents — payment, contract and progress — overlapping around a shared supervisor, wrapped by an audit layer"
+      aria-label="Coverage map: three circles for the payment, contract and progress agents. Where they overlap, a question needs more than one agent and the supervisor merges their evidence. A dashed ring around all three marks the audit pass."
       className="h-full w-full"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -74,7 +76,7 @@ function AgentVenn() {
         letterSpacing="1.6"
         fill="#0f8fa3"
       >
-        AUDIT LAYER
+        AUDIT PASS
       </text>
 
       {circles.map((c) => (
@@ -140,38 +142,40 @@ export function Hero() {
     >
       <div className="grid gap-[clamp(20px,4vh,40px)] lg:min-h-0 lg:flex-1 lg:grid-cols-12 lg:gap-0">
         <div className="flex flex-col justify-center lg:col-span-4 lg:pr-[clamp(28px,4vw,72px)]">
-          <div>
-            <p className="font-mono text-xs font-medium tracking-[0.04em] text-brand2">
-              {hero.kicker}
-            </p>
-            <h1 className="my-3 text-[clamp(40px,min(6vw,10vh),112px)] font-semibold leading-[0.9] tracking-[-0.075em]">
-              {site.name}
-            </h1>
-            <p className="text-[clamp(18px,min(2.4vw,4vh),33px)] leading-[1.1] tracking-[-0.035em] text-muted">
-              {hero.role[0]}
-              <br />
-              {hero.role[1]}
+          <p className="font-mono text-xs font-medium tracking-[0.04em] text-brand2">
+            {hero.kicker}
+          </p>
+          <h1 className="my-3 text-[clamp(40px,min(6vw,10vh),112px)] font-semibold leading-[0.9] tracking-[-0.075em]">
+            {site.name}
+          </h1>
+          <p className="text-[clamp(18px,min(2.4vw,4vh),33px)] leading-[1.1] tracking-[-0.035em] text-muted">
+            {hero.role[0]}
+            <br />
+            {hero.role[1]}
+          </p>
+
+          <div className="mt-[clamp(20px,3.5vh,36px)] border-t border-line pt-[clamp(14px,2.4vh,24px)]">
+            <h2 className="mb-2.5 font-mono text-xs font-medium tracking-[0.05em] text-brand2">
+              ABOUT ME
+            </h2>
+            <p className="max-w-[48ch] text-[15px] leading-relaxed text-muted">
+              {hero.about}
             </p>
           </div>
         </div>
 
-        <div className="flex flex-col overflow-hidden border-line lg:col-span-4 lg:h-full lg:border-x">
-          <div className="shrink-0 border-b border-line bg-s1 px-[clamp(22px,2.5vw,40px)] py-[clamp(14px,2.6vh,38px)]">
-            <h2 className="mb-3 font-mono text-xs font-medium tracking-[0.05em] text-brand2">
-              ABOUT ME
-            </h2>
-            <p className="max-w-[46ch] text-base leading-relaxed text-muted">
-              {hero.about}
-            </p>
-          </div>
+        <div className="flex items-center justify-center border-line lg:col-span-4 lg:h-full lg:border-x lg:px-[clamp(20px,2.5vw,44px)]">
           <PhotoPanel />
         </div>
 
         <div className="flex flex-col justify-center lg:col-span-4 lg:items-start lg:pl-[clamp(28px,4vw,72px)] max-lg:grid max-lg:grid-cols-2 max-lg:items-center max-lg:gap-7 max-sm:grid-cols-1">
-          <div className="aspect-square h-[clamp(180px,31vh,300px)] shrink-0 max-lg:mx-auto max-lg:h-auto max-lg:w-full max-lg:max-w-[300px] lg:mb-7">
+          <div className="aspect-square h-[clamp(170px,28vh,280px)] shrink-0 max-lg:mx-auto max-lg:h-auto max-lg:w-full max-lg:max-w-[280px] lg:mb-4">
             <AgentVenn />
           </div>
           <div>
+            <p className="mb-[clamp(16px,2.4vh,26px)] max-w-[46ch] font-mono text-[11px] leading-[1.7] text-dim">
+              {hero.featured.diagramNote}
+            </p>
             <p className="font-mono text-xs font-medium tracking-[0.04em] text-brand2">
               {hero.featured.kicker}
             </p>
