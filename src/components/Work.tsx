@@ -2,6 +2,7 @@ import { projects } from "@/lib/content";
 import type { IconType } from "react-icons";
 import {
   SiDart,
+  SiDocker,
   SiElectron,
   SiExpress,
   SiFirebase,
@@ -10,18 +11,23 @@ import {
   SiLangchain,
   SiMongodb,
   SiNodedotjs,
+  SiPostgresql,
   SiPython,
   SiRazorpay,
   SiReact,
+  SiTypescript,
 } from "react-icons/si";
 import { Section } from "./Section";
 
 const techIcons: Record<string, { Icon: IconType; color: string }> = {
   React: { Icon: SiReact, color: "#61DAFB" },
+  TypeScript: { Icon: SiTypescript, color: "#3178C6" },
   Python: { Icon: SiPython, color: "#FFD43B" },
   LangChain: { Icon: SiLangchain, color: "#FFFFFF" },
   Express: { Icon: SiExpress, color: "#FFFFFF" },
   MongoDB: { Icon: SiMongodb, color: "#47A248" },
+  PostgreSQL: { Icon: SiPostgresql, color: "#4169E1" },
+  Docker: { Icon: SiDocker, color: "#2496ED" },
   Flutter: { Icon: SiFlutter, color: "#54C5F8" },
   Dart: { Icon: SiDart, color: "#0175C2" },
   Firebase: { Icon: SiFirebase, color: "#FFCA28" },
