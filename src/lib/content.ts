@@ -78,7 +78,8 @@ export const projects: Project[] = [
     detail:
       "Now used daily by 30+ contractors and workers across 3 client construction firms, with Firebase Auth and Razorpay giving every business a single auditable source of truth for progress-to-payment matching.",
     stack: ["Flutter", "Dart", "Firebase", "Razorpay"],
-    tags: ["Demo coming soon", "Repository private"],
+    tags: ["Demo coming soon"],
+    github: "https://github.com/VARITHSA/nirman",
   },
   {
     meta: "BACKEND LEAD · CLIENT PROJECT (VIA LYPTRON) · MUSIC EDUCATION",
