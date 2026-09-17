@@ -56,7 +56,7 @@ export function Hero() {
     <section
       id="top"
       aria-label="Introduction"
-      className="shell grid gap-10 py-[clamp(42px,6vw,76px)] lg:grid-cols-12 lg:items-start lg:gap-0"
+      className="shell grid min-h-[calc(100svh-70px)] gap-10 py-[clamp(42px,6vw,76px)] lg:grid-cols-12 lg:items-center lg:gap-0"
     >
       <div className="flex flex-col justify-center lg:col-span-4 lg:pr-[clamp(28px,4vw,72px)]">
         <div>
