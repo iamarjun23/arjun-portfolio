@@ -1,5 +1,4 @@
 import { Contact } from "@/components/Contact";
-import { CursorGlow } from "@/components/CursorGlow";
 import { Experience } from "@/components/Experience";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
@@ -23,7 +22,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-      <CursorGlow />
     </>
   );
 }
