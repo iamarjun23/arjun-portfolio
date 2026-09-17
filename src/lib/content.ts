@@ -39,9 +39,9 @@ export const hero = {
     title: "Construction Ops Multi-Agent System",
     blurb:
       "Three domain agents retrieve through typed, access-controlled tools; an audit agent verifies every claim against its evidence before it ships.",
-    // Explains what the overlaps in the hero diagram actually mean.
+    // Says in words what the hero wireframe draws.
     diagramNote:
-      "Each circle is what one agent can answer alone. Overlaps are questions that need more than one — the supervisor splits those and merges the evidence.",
+      "The path every question takes: the supervisor splits it across the agents that can answer it, then the audit agent checks each claim against its source before the answer ships.",
     tags: ["Personal project", "Multi-agent architecture"],
   },
 } as const;

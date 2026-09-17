@@ -28,106 +28,201 @@ function PhotoPanel() {
   );
 }
 
-/** Coverage map for the featured project: each circle is what one specialist
- * agent can answer on its own, overlaps are questions that need more than one
- * (the supervisor's job), and the dashed ring is the audit pass every answer
- * goes through. The caption under it spells this out. */
-function AgentVenn() {
-  const circles = [
-    { cx: 120, cy: 142, label: "PAYMENT", lx: 93, ly: 116 },
-    { cx: 200, cy: 142, label: "CONTRACT", lx: 227, ly: 116 },
-    { cx: 160, cy: 214, label: "PROGRESS", lx: 160, ly: 252 },
-  ];
+/* Theme tokens, inlined so the SVG can paint with them. */
+const LINE = "#2a2d2e";
+const PANEL = "#0b0b0b";
+const BAR = "#232627";
+const BRAND = "#20d3ee";
+const BRAND2 = "#0f8fa3";
+const MUTED = "#b5babb";
+const DIM = "#858b8c";
 
+const agents = [
+  { label: "PAYMENT", x: 4 },
+  { label: "CONTRACT", x: 112 },
+  { label: "PROGRESS", x: 220 },
+];
+
+/** Solid frame for a step that is code, dashed accent for a step that is a
+ * checkpoint — same language as the project architecture diagrams. */
+const Box = ({
+  x,
+  y,
+  w,
+  h,
+  accent = false,
+}: {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  accent?: boolean;
+}) => (
+  <rect
+    x={x}
+    y={y}
+    width={w}
+    height={h}
+    rx={4}
+    fill={accent ? BRAND2 : PANEL}
+    fillOpacity={accent ? 0.14 : 1}
+    stroke={accent ? BRAND2 : LINE}
+    strokeDasharray={accent ? "3 3" : undefined}
+  />
+);
+
+/** The featured project drawn the way the rest of the site draws systems: a
+ * wireframe of the path one question takes — supervisor splits it across the
+ * agents that can answer it, the audit agent checks every claim against its
+ * evidence, and only then does the answer ship. The caption under it says the
+ * same thing in words. */
+function AgentFlow() {
   return (
     <svg
       viewBox="0 0 320 320"
       role="img"
-      aria-label="Coverage map: three circles for the payment, contract and progress agents. Where they overlap, a question needs more than one agent and the supervisor merges their evidence. A dashed ring around all three marks the audit pass."
+      aria-label="Wireframe of the question path: a question goes to the supervisor, which splits it across the payment, contract and progress agents; their evidence goes to an audit agent that verifies every claim before the cited answer is returned."
       className="h-full w-full"
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        <filter id="venn-glow" x="-60%" y="-60%" width="220%" height="220%">
-          <feGaussianBlur stdDeviation="5" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
+        <marker
+          id="hero-arrow"
+          markerWidth="7"
+          markerHeight="7"
+          refX="6"
+          refY="3.5"
+          orient="auto"
+        >
+          <path d="M0,0 L7,3.5 L0,7 Z" fill={DIM} />
+        </marker>
       </defs>
 
-      <circle
-        cx={160}
-        cy={170}
-        r={140}
+      <g
+        stroke={LINE}
+        strokeWidth={1.25}
+        markerEnd="url(#hero-arrow)"
         fill="none"
-        stroke="#0f8fa3"
-        strokeWidth={1}
-        strokeDasharray="4 6"
-        opacity={0.6}
-      />
-      <text
-        x={160}
-        y={18}
-        textAnchor="middle"
-        fontFamily="monospace"
-        fontSize="11"
-        letterSpacing="1.6"
-        fill="#0f8fa3"
       >
-        AUDIT PASS
+        <line x1={160} y1={40} x2={160} y2={52} />
+        <path d="M160 88 L160 96 L52 96 L52 108" />
+        <path d="M160 88 L160 108" />
+        <path d="M160 88 L160 96 L268 96 L268 108" />
+        <path d="M52 166 L52 178 L160 178 L160 188" />
+        <path d="M160 166 L160 188" />
+        <path d="M268 166 L268 178 L160 178 L160 188" />
+        <line x1={160} y1={224} x2={160} y2={236} />
+      </g>
+
+      {/* Question — a wireframe input bar, where every answer starts. */}
+      <Box x={52} y={10} w={216} h={28} />
+      <circle cx={68} cy={24} r={3} fill={BRAND} />
+      <text
+        x={80}
+        y={27}
+        fontFamily="monospace"
+        fontSize="9"
+        letterSpacing="0.6"
+        fill={MUTED}
+      >
+        QUESTION
       </text>
+      <rect x={150} y={21} width={104} height={5} rx={2.5} fill={BAR} />
 
-      {circles.map((c) => (
-        <circle
-          key={c.label}
-          cx={c.cx}
-          cy={c.cy}
-          r={74}
-          fill="#20d3ee"
-          fillOpacity={0.1}
-          stroke="#20d3ee"
-          strokeOpacity={0.55}
-          strokeWidth={1.25}
-        />
-      ))}
-
-      {circles.map((c) => (
-        <text
-          key={c.label}
-          x={c.lx}
-          y={c.ly}
-          textAnchor="middle"
-          fontFamily="monospace"
-          fontSize="13"
-          letterSpacing="0.8"
-          fill="#b5babb"
-        >
-          {c.label}
-        </text>
-      ))}
-
-      <rect
-        x={151}
-        y={157}
-        width={18}
-        height={18}
-        rx={1.5}
-        fill="#20d3ee"
-        filter="url(#venn-glow)"
-        transform="rotate(45 160 166)"
-      />
+      {/* Supervisor — splits the question, merges what comes back. */}
+      <Box x={40} y={56} w={240} h={32} accent />
       <text
         x={160}
-        y={199}
+        y={72}
         textAnchor="middle"
         fontFamily="monospace"
-        fontSize="11"
-        letterSpacing="1"
-        fill="#72e6f5"
+        fontSize="10"
+        letterSpacing="0.8"
+        fill={BRAND}
       >
         SUPERVISOR
+      </text>
+      <text
+        x={160}
+        y={83}
+        textAnchor="middle"
+        fontFamily="monospace"
+        fontSize="8.5"
+        fill={DIM}
+      >
+        splits the question · merges the evidence
+      </text>
+
+      {/* One box per specialist agent, each retrieving through typed tools. */}
+      {agents.map((agent) => (
+        <g key={agent.label}>
+          <Box x={agent.x} y={110} w={96} h={56} />
+          <circle cx={agent.x + 14} cy={126} r={3} fill={BRAND} />
+          <text
+            x={agent.x + 24}
+            y={129}
+            fontFamily="monospace"
+            fontSize="8.5"
+            letterSpacing="0.4"
+            fill={MUTED}
+          >
+            {agent.label}
+          </text>
+          {[76, 60, 44].map((w, i) => (
+            <rect
+              key={w}
+              x={agent.x + 10}
+              y={138 + i * 11}
+              width={w}
+              height={5}
+              rx={2.5}
+              fill={BAR}
+            />
+          ))}
+        </g>
+      ))}
+
+      {/* Audit — nothing ships until every claim matches its source. */}
+      <Box x={40} y={190} w={240} h={34} accent />
+      <text
+        x={160}
+        y={206}
+        textAnchor="middle"
+        fontFamily="monospace"
+        fontSize="10"
+        letterSpacing="0.8"
+        fill={BRAND}
+      >
+        AUDIT
+      </text>
+      <text
+        x={160}
+        y={218}
+        textAnchor="middle"
+        fontFamily="monospace"
+        fontSize="8.5"
+        fill={DIM}
+      >
+        every claim checked against its source
+      </text>
+
+      {/* Answer — wireframe text block with the citation that backs it. */}
+      <Box x={40} y={238} w={240} h={72} />
+      <text
+        x={54}
+        y={257}
+        fontFamily="monospace"
+        fontSize="9"
+        letterSpacing="0.6"
+        fill={MUTED}
+      >
+        ANSWER
+      </text>
+      <rect x={54} y={266} width={212} height={5} rx={2.5} fill={BAR} />
+      <rect x={54} y={277} width={168} height={5} rx={2.5} fill={BAR} />
+      <rect x={54} y={292} width={2} height={12} fill={BRAND} />
+      <text x={64} y={302} fontFamily="monospace" fontSize="8.5" fill={BRAND}>
+        cited · verified
       </text>
     </svg>
   );
@@ -169,8 +264,8 @@ export function Hero() {
         </div>
 
         <div className="flex flex-col justify-center lg:col-span-4 lg:items-start lg:pl-[clamp(28px,4vw,72px)] max-lg:grid max-lg:grid-cols-2 max-lg:items-center max-lg:gap-7 max-sm:grid-cols-1">
-          <div className="aspect-square h-[clamp(170px,28vh,280px)] shrink-0 max-lg:mx-auto max-lg:h-auto max-lg:w-full max-lg:max-w-[280px] lg:mb-4">
-            <AgentVenn />
+          <div className="aspect-square h-[clamp(190px,30vh,300px)] shrink-0 max-lg:mx-auto max-lg:h-auto max-lg:w-full max-lg:max-w-[300px] lg:mb-4">
+            <AgentFlow />
           </div>
           <div>
             <p className="mb-[clamp(16px,2.4vh,26px)] max-w-[46ch] font-mono text-[11px] leading-[1.7] text-dim">
