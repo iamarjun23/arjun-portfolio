@@ -25,7 +25,21 @@ function Frame({ children, viewBox = "0 0 400 240" }: { children: ReactNode; vie
   );
 }
 
-function BrowserChrome({ x = 0, y = 0, w = 400, h = 240, accent = BRAND }: { x?: number; y?: number; w?: number; h?: number; accent?: string }) {
+function BrowserChrome({
+  x = 0,
+  y = 0,
+  w = 400,
+  h = 240,
+  accent = BRAND,
+  url,
+}: {
+  x?: number;
+  y?: number;
+  w?: number;
+  h?: number;
+  accent?: string;
+  url?: string;
+}) {
   return (
     <g>
       <rect x={x} y={y} width={w} height={h} rx={10} fill="#0c0e11" stroke={LINE} />
@@ -35,7 +49,16 @@ function BrowserChrome({ x = 0, y = 0, w = 400, h = 240, accent = BRAND }: { x?:
       <circle cx={x + 28} cy={y + 13} r={3.5} fill="#3a4048" />
       <circle cx={x + 40} cy={y + 13} r={3.5} fill="#3a4048" />
       <rect x={x + 60} y={y + 8} width={w - 90} height={10} rx={5} fill="#181c21" />
-      <rect x={x + 60} y={y + 8} width={40} height={10} rx={5} fill={accent} opacity={0.25} />
+      {url ? (
+        <>
+          <circle cx={x + 70} cy={y + 13} r={2.5} fill="#4ade80" />
+          <text x={x + 78} y={y + 16} fontFamily="monospace" fontSize="7.5" fill={MUTED} letterSpacing="0.2">
+            {url}
+          </text>
+        </>
+      ) : (
+        <rect x={x + 60} y={y + 8} width={40} height={10} rx={5} fill={accent} opacity={0.25} />
+      )}
     </g>
   );
 }
@@ -45,7 +68,7 @@ function BrowserChrome({ x = 0, y = 0, w = 400, h = 240, accent = BRAND }: { x?:
 function ConstructionOpsPreview() {
   return (
     <Frame>
-      <BrowserChrome />
+      <BrowserChrome url="app.arjunl.dev/construction-ops" />
       {[
         { label: "PAYMENT", x: 20 },
         { label: "CONTRACT", x: 148 },
@@ -120,7 +143,7 @@ function NirmanPreview() {
 function IdyaniPreview() {
   return (
     <Frame>
-      <BrowserChrome accent="#20d3ee" />
+      <BrowserChrome url="idyani.app" />
       {/* staff lines */}
       {[0, 1, 2, 3, 4].map((i) => (
         <line key={i} x1={24} y1={54 + i * 10} x2={376} y2={54 + i * 10} stroke={LINE} strokeWidth={1} />
@@ -152,7 +175,7 @@ function IdyaniPreview() {
 function MadhuPortfolioPreview() {
   return (
     <Frame>
-      <BrowserChrome />
+      <BrowserChrome url="nmadhukumar.com" />
       <rect x={20} y={46} width={200} height={14} rx={3} fill="#22262c" />
       <rect x={20} y={68} width={140} height={8} rx={3} fill="#181c21" />
       <rect x={20} y={82} width={110} height={8} rx={3} fill="#181c21" />

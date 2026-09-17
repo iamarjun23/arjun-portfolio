@@ -56,8 +56,9 @@ export function Hero() {
     <section
       id="top"
       aria-label="Introduction"
-      className="shell grid min-h-[calc(100svh-70px)] gap-10 py-[clamp(42px,6vw,76px)] lg:grid-cols-12 lg:items-center lg:gap-0"
+      className="shell relative flex min-h-[calc(100svh-70px)] flex-col justify-center py-[clamp(32px,5vw,56px)]"
     >
+    <div className="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-0">
       <div className="flex flex-col justify-center lg:col-span-4 lg:pr-[clamp(28px,4vw,72px)]">
         <div>
           <p className="font-mono text-xs font-medium tracking-[0.04em] text-brand2">
@@ -111,6 +112,20 @@ export function Hero() {
           </ul>
         </div>
       </div>
+    </div>
+
+      <a
+        href="#work"
+        aria-label="Scroll to selected work"
+        className="group absolute inset-x-0 bottom-2 mx-auto hidden w-fit flex-col items-center gap-2 lg:flex"
+      >
+        <span className="font-mono text-[10px] tracking-[0.15em] text-dim transition-colors duration-200 group-hover:text-brand2">
+          SCROLL
+        </span>
+        <span className="flex h-8 w-5 items-start justify-center rounded-full border border-line pt-1.5 transition-colors duration-200 group-hover:border-brand2">
+          <span className="size-1 animate-bounce rounded-full bg-brand2" />
+        </span>
+      </a>
     </section>
   );
 }
