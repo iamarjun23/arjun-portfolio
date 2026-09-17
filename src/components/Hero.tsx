@@ -3,7 +3,7 @@ import { hero, site } from "@/lib/content";
 
 function PhotoPanel() {
   return (
-    <div className="relative aspect-square max-h-[420px] w-full overflow-hidden bg-[linear-gradient(160deg,#20d3ee_0%,#087d8f_100%)]">
+    <div className="relative aspect-square max-h-[clamp(110px,30vh,420px)] w-full overflow-hidden bg-[linear-gradient(160deg,#20d3ee_0%,#087d8f_100%)]">
       <span
         aria-hidden
         className="pointer-events-none absolute bottom-6 -right-1 select-none text-[clamp(52px,6vw,86px)] font-bold leading-none tracking-[-0.08em] text-black/20 [writing-mode:vertical-rl] [transform:rotate(180deg)]"
@@ -39,7 +39,7 @@ function Mockup() {
   return (
     <div
       aria-hidden
-      className="mb-8 h-[clamp(160px,27vh,220px)] -rotate-[4deg] overflow-hidden rounded-sm bg-[linear-gradient(145deg,#edf1f2,#777d7f)] p-4.5 shadow-[0_20px_55px_rgba(0,0,0,0.45)]"
+      className="mb-8 h-[clamp(110px,20vh,220px)] -rotate-[4deg] overflow-hidden rounded-sm bg-[linear-gradient(145deg,#edf1f2,#777d7f)] p-4.5 shadow-[0_20px_55px_rgba(0,0,0,0.45)]"
     >
       <div className="mb-4 h-2 w-[38%] rounded-full bg-[#20d3ee]" />
       <div className="grid grid-cols-2 gap-3">
@@ -56,18 +56,18 @@ export function Hero() {
     <section
       id="top"
       aria-label="Introduction"
-      className="shell relative flex min-h-[calc(100svh-70px)] flex-col justify-center py-[clamp(32px,5vw,56px)]"
+      className="shell relative flex flex-col py-[clamp(16px,3vh,56px)] lg:h-[calc(100svh-70px)] lg:justify-center lg:overflow-hidden"
     >
-    <div className="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-0">
+    <div className="grid gap-[clamp(20px,4vh,40px)] lg:grid-cols-12 lg:items-start lg:gap-0">
       <div className="flex flex-col justify-center lg:col-span-4 lg:pr-[clamp(28px,4vw,72px)]">
         <div>
           <p className="font-mono text-xs font-medium tracking-[0.04em] text-brand2">
             {hero.kicker}
           </p>
-          <h1 className="my-3 text-[clamp(58px,6vw,112px)] font-semibold leading-[0.9] tracking-[-0.075em]">
+          <h1 className="my-3 text-[clamp(40px,min(6vw,10vh),112px)] font-semibold leading-[0.9] tracking-[-0.075em]">
             {site.name}
           </h1>
-          <p className="text-[clamp(20px,2.4vw,33px)] leading-[1.1] tracking-[-0.035em] text-muted">
+          <p className="text-[clamp(18px,min(2.4vw,4vh),33px)] leading-[1.1] tracking-[-0.035em] text-muted">
             {hero.role[0]}
             <br />
             {hero.role[1]}
@@ -77,7 +77,7 @@ export function Hero() {
       </div>
 
       <div className="overflow-hidden border-line lg:col-span-4 lg:border-x">
-        <div className="border-b border-line bg-s1 px-[clamp(22px,2.5vw,40px)] py-[clamp(22px,2.8vw,38px)]">
+        <div className="border-b border-line bg-s1 px-[clamp(22px,2.5vw,40px)] py-[clamp(14px,2.6vh,38px)]">
           <h2 className="mb-3 font-mono text-xs font-medium tracking-[0.05em] text-brand2">
             ABOUT ME
           </h2>
@@ -117,7 +117,7 @@ export function Hero() {
       <a
         href="#work"
         aria-label="Scroll to selected work"
-        className="group absolute inset-x-0 bottom-2 mx-auto hidden w-fit flex-col items-center gap-2 lg:flex"
+        className="group absolute inset-x-0 bottom-2 mx-auto hidden w-fit flex-col items-center gap-2 [@media(min-height:640px)]:lg:flex"
       >
         <span className="font-mono text-[10px] tracking-[0.15em] text-dim transition-colors duration-200 group-hover:text-brand2">
           SCROLL
