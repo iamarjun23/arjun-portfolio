@@ -33,7 +33,7 @@ export const hero = {
   kicker: "SOFTWARE DEVELOPMENT ENGINEER · BANGALORE / REMOTE",
   role: ["Backend, AI &", "Full-stack Engineer"],
   about:
-    "I'm a backend-leaning full-stack engineer who likes shipping things people actually use, not just prototypes. Outside client work, I spend a lot of time on multi-agent AI systems built with LangChain and Claude. Currently looking for an SDE-1 role in backend or full-stack engineering.",
+    "I'm a backend-leaning full-stack engineer who likes shipping things people actually use, not just prototypes. Outside client work, I spend a lot of time on multi-agent AI systems built with LangChain. Currently looking for an SDE-1 role in backend or full-stack engineering.",
   featured: {
     kicker: "FEATURED PROJECT",
     title: "Construction Ops Multi-Agent System",

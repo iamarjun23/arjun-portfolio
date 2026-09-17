@@ -3,7 +3,7 @@ import { hero, site } from "@/lib/content";
 
 function PhotoPanel() {
   return (
-    <div className="relative aspect-square w-full overflow-hidden bg-[linear-gradient(160deg,#20d3ee_0%,#087d8f_100%)]">
+    <div className="relative aspect-square max-h-[420px] w-full overflow-hidden bg-[linear-gradient(160deg,#20d3ee_0%,#087d8f_100%)]">
       <span
         aria-hidden
         className="pointer-events-none absolute bottom-6 -right-1 select-none text-[clamp(52px,6vw,86px)] font-bold leading-none tracking-[-0.08em] text-black/20 [writing-mode:vertical-rl] [transform:rotate(180deg)]"
@@ -56,7 +56,7 @@ export function Hero() {
     <section
       id="top"
       aria-label="Introduction"
-      className="shell grid gap-10 py-[clamp(42px,6vw,76px)] lg:grid-cols-12 lg:items-center lg:gap-0"
+      className="shell grid gap-10 py-[clamp(42px,6vw,76px)] lg:grid-cols-12 lg:items-start lg:gap-0"
     >
       <div className="flex flex-col justify-center lg:col-span-4 lg:pr-[clamp(28px,4vw,72px)]">
         <div>
