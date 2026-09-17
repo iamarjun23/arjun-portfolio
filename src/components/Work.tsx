@@ -7,17 +7,22 @@ import {
   SiExpress,
   SiFirebase,
   SiFlutter,
+  SiGithub,
   SiJavascript,
   SiLangchain,
   SiMongodb,
+  SiNextdotjs,
   SiNodedotjs,
   SiPostgresql,
   SiPython,
   SiRazorpay,
   SiReact,
+  SiTailwindcss,
   SiTypescript,
 } from "react-icons/si";
+import { Button } from "./Button";
 import { Section } from "./Section";
+import { projectArchitectures, projectPreviews } from "./work/ProjectVisuals";
 
 const techIcons: Record<string, { Icon: IconType; color: string }> = {
   React: { Icon: SiReact, color: "#61DAFB" },
@@ -36,6 +41,8 @@ const techIcons: Record<string, { Icon: IconType; color: string }> = {
   Electron: { Icon: SiElectron, color: "#9FEAF9" },
   "Node.js": { Icon: SiNodedotjs, color: "#5FA04E" },
   JavaScript: { Icon: SiJavascript, color: "#F7DF1E" },
+  "Next.js": { Icon: SiNextdotjs, color: "#FFFFFF" },
+  "Tailwind CSS": { Icon: SiTailwindcss, color: "#38BDF8" },
 };
 
 export function Work() {
@@ -43,13 +50,17 @@ export function Work() {
     <Section
       id="work"
       title="Selected work"
-      intro="Three products where I owned meaningful parts of the system from repository to delivery."
+      intro="Four products where I owned meaningful parts of the system from repository to delivery."
     >
       <ul className="grid">
-        {projects.map((project, index) => (
+        {projects.map((project, index) => {
+          const Preview = projectPreviews[project.title];
+          const Architecture = projectArchitectures[project.title];
+
+          return (
           <li
             key={project.title}
-            className="reveal grid gap-x-8 gap-y-5 border-b border-line py-10 lg:grid-cols-12"
+            className="reveal grid gap-x-8 gap-y-6 border-b border-line py-10 lg:grid-cols-12"
           >
             <p className="font-mono text-xs text-dim lg:col-span-1 lg:pt-1">
               0{index + 1}
@@ -102,9 +113,47 @@ export function Work() {
                   </li>
                 ))}
               </ul>
+              <div className="mt-5 flex flex-wrap gap-2.5">
+                {project.github && (
+                  <Button href={project.github} target="_blank" rel="noopener noreferrer">
+                    <SiGithub aria-hidden className="size-[14px]" /> Code
+                  </Button>
+                )}
+                {project.live && (
+                  <Button variant="primary" href={project.live} target="_blank" rel="noopener noreferrer">
+                    Visit site <span aria-hidden>↗</span>
+                  </Button>
+                )}
+              </div>
             </div>
+
+            {(Preview || Architecture) && (
+              <div className="grid gap-4 sm:grid-cols-2 lg:col-span-11 lg:col-start-2">
+                {Preview && (
+                  <div className="overflow-hidden rounded-[10px] border border-line bg-s1">
+                    <p className="border-b border-line px-3.5 py-2.5 font-mono text-[10px] tracking-[0.06em] text-dim">
+                      PREVIEW
+                    </p>
+                    <div className="aspect-[5/3] w-full">
+                      <Preview />
+                    </div>
+                  </div>
+                )}
+                {Architecture && (
+                  <div className="overflow-hidden rounded-[10px] border border-line bg-s1">
+                    <p className="border-b border-line px-3.5 py-2.5 font-mono text-[10px] tracking-[0.06em] text-dim">
+                      ARCHITECTURE
+                    </p>
+                    <div className="aspect-[5/3] w-full">
+                      <Architecture />
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </li>
-        ))}
+          );
+        })}
       </ul>
     </Section>
   );

@@ -51,6 +51,8 @@ export type Project = {
   detail?: string;
   stack: string[];
   tags: string[];
+  github?: string;
+  live?: string;
 };
 
 export const projects: Project[] = [
@@ -64,7 +66,8 @@ export const projects: Project[] = [
     detail:
       "Enforced zone-based access control via parameterized SQL, streamed full request tracing to a React UI over SSE, and built an evaluation harness benchmarking against plain-RAG and single-agent baselines on citation correctness and unsupported-claim rate.",
     stack: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL", "Docker"],
-    tags: ["Demo coming soon", "Repository private"],
+    tags: ["Demo coming soon"],
+    github: "https://github.com/iamarjun23/construction-ops-multi-agent",
   },
   {
     meta: "BACKEND LEAD · CLIENT PROJECT (VIA LYPTRON) · CONSTRUCTION",
@@ -86,7 +89,20 @@ export const projects: Project[] = [
     detail:
       "Supports 50+ students, 5 teachers, and 3 composers, with Firebase Auth and session handling for student-teacher bookings, payments, and a teacher dashboard tracking individual progress.",
     stack: ["Electron", "Node.js", "Firebase", "JavaScript"],
-    tags: ["Demo coming soon", "Repository private"],
+    tags: ["Demo coming soon"],
+    github: "https://github.com/iamarjun23/IYDANI-SCORER",
+  },
+  {
+    meta: "FULL-STACK · CLIENT PROJECT (VIA LYPTRON) · PORTFOLIO SITE",
+    title: "MadhuPortfolio",
+    problem: "A client needed a professional, responsive site to showcase their work and background.",
+    built:
+      "A personal portfolio website built with Next.js and a custom, responsive front end, covering everything from content structure to layout and deployment.",
+    detail: "Live in production for the client at nmadhukumar.com.",
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    tags: ["Live site"],
+    github: "https://github.com/iamarjun23/MadhuPortfolio",
+    live: "https://nmadhukumar.com",
   },
 ];
 
