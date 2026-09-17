@@ -68,16 +68,22 @@ export function Work() {
             <div className="lg:col-span-7">
               <p className="mb-3 font-mono text-[11px] text-brand2">{project.meta}</p>
               <h3 className="mb-3 text-[clamp(26px,2.6vw,42px)] tracking-[-0.045em]">{project.title}</h3>
-              <p className="max-w-[78ch] text-base text-muted">
-                <b className="font-medium text-ink">Problem:</b> {project.problem}{" "}
-                <b className="font-medium text-ink">Built:</b> {project.built}
+              <dl className="max-w-[78ch] space-y-3">
+                <div>
+                  <dt className="mb-1 font-mono text-[11px] tracking-[0.04em] text-dim">PROBLEM</dt>
+                  <dd className="text-base text-muted">{project.problem}</dd>
+                </div>
+                <div>
+                  <dt className="mb-1 font-mono text-[11px] tracking-[0.04em] text-dim">BUILT</dt>
+                  <dd className="text-base text-muted">{project.built}</dd>
+                </div>
                 {project.detail && (
-                  <>
-                    {" "}
-                    <b className="font-medium text-ink">Detail:</b> {project.detail}
-                  </>
+                  <div>
+                    <dt className="mb-1 font-mono text-[11px] tracking-[0.04em] text-dim">DETAIL</dt>
+                    <dd className="text-base text-muted">{project.detail}</dd>
+                  </div>
                 )}
-              </p>
+              </dl>
             </div>
 
             <div className="border-line pt-4 max-lg:border-t lg:col-span-4 lg:border-l lg:pl-8 lg:pt-0">
