@@ -5,13 +5,14 @@
 
 export const site = {
   // Set this to the real domain before deploying (also used for OG tags + sitemap).
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://arjun-l-engineer-portfolio.lyptron-6105.chatgpt.site",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://arjunl.com",
   name: "Arjun L",
-  role: "Software Engineer",
-  title: "Arjun L — Software Engineer",
+  role: "Software Development Engineer",
+  title: "Arjun L — Software Development Engineer",
   description:
-    "Backend, AI/RAG, and full-stack software engineer. Production products across web, mobile, desktop, and AI retrieval.",
+    "Backend-leaning full-stack engineer building multi-agent AI systems and production products across web, mobile, and desktop.",
   location: "Bangalore / Remote",
+  phone: "+91 9513399668",
   email: "arjun23021@gmail.com",
   github: "https://github.com/iamarjun23",
   linkedin: "https://linkedin.com/in/arjun-l-929410219",
@@ -29,16 +30,16 @@ export const nav = [
 ] as const;
 
 export const hero = {
-  kicker: "SOFTWARE ENGINEER · BANGALORE / REMOTE",
+  kicker: "SOFTWARE DEVELOPMENT ENGINEER · BANGALORE / REMOTE",
   role: ["Backend, AI &", "Full-stack Engineer"],
   about:
-    "I build production-minded products across web, mobile, desktop, and AI retrieval. Currently looking for an SDE-1 role where I can go deep on backend systems.",
+    "I'm a backend-leaning full-stack engineer who likes shipping things people actually use, not just prototypes. Outside client work, I spend a lot of time on multi-agent AI systems built with LangChain and Claude. Currently looking for an SDE-1 role in backend or full-stack engineering.",
   featured: {
     kicker: "FEATURED PROJECT",
-    title: "RAG Legal Assistant",
+    title: "Construction Ops Multi-Agent System",
     blurb:
-      "Natural-language search across legal case files, with grounded answers powered by retrieval and reranking.",
-    tags: ["Demo coming soon", "Repository private"],
+      "A supervisor-based multi-agent RAG system with domain-specialist agents, an audit agent that verifies every claim against evidence, and zone-based access control enforced at the tool layer.",
+    tags: ["Personal project", "Multi-agent architecture"],
   },
 } as const;
 
@@ -54,50 +55,55 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    meta: "FULL-STACK OWNER · 2025 · LAW FIRM",
-    title: "RAG Legal Assistant",
-    problem: "Associates searched case PDFs manually.",
+    meta: "MULTI-AGENT ARCHITECTURE & BACKEND · PERSONAL PROJECT",
+    title: "Construction Ops Multi-Agent System",
+    problem:
+      "A single vector-search pipeline couldn't handle access control or verify its own answers.",
     built:
-      "React + TypeScript client, Python retrieval service, LangChain chunking, Pinecone search, Express integration, and MongoDB history.",
+      "A supervisor-based multi-agent RAG system with three domain-specialist agents (Payment, Contract, Progress) that each retrieve through typed, access-controlled tools instead of open-ended prompts. A Supervisor agent decomposes questions and merges evidence; an Audit agent verifies every claim and triggers targeted retries.",
     detail:
-      "Added MMR reranking to reduce duplicate clauses and ground answers in source passages.",
-    stack: ["React", "Python", "LangChain", "Pinecone", "Express", "MongoDB"],
+      "Enforced zone-based access control via parameterized SQL, streamed full request tracing to a React UI over SSE, and built an evaluation harness benchmarking against plain-RAG and single-agent baselines on citation correctness and unsupported-claim rate.",
+    stack: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL", "Docker"],
     tags: ["Demo coming soon", "Repository private"],
   },
   {
-    meta: "BACKEND LEAD · 2024 · CONSTRUCTION",
+    meta: "BACKEND LEAD · CLIENT PROJECT (VIA LYPTRON) · CONSTRUCTION",
     title: "Nirman",
-    problem: "Work completion and payments were reconciled manually.",
+    problem: "Work-progress and payment status were reconciled manually across construction sites.",
     built:
-      "Backend for a 15-screen Flutter app with real-time state synchronization, role-based access, and Razorpay integration.",
-    stack: ["Flutter", "Dart", "Firebase", "Firestore", "Razorpay"],
+      "Backend for a 15-screen Flutter app tying work-progress logs directly to payment status, with Provider-based state management keeping data synchronized in real time and project-code-based, role-based access control.",
+    detail:
+      "Now used daily by 30+ contractors and workers across 3 client construction firms, with Firebase Auth and Razorpay giving every business a single auditable source of truth for progress-to-payment matching.",
+    stack: ["Flutter", "Dart", "Firebase", "Razorpay"],
     tags: ["Demo coming soon", "Repository private"],
   },
   {
-    meta: "BACKEND LEAD · 2024 · MUSIC EDUCATION",
+    meta: "BACKEND LEAD · CLIENT PROJECT (VIA LYPTRON) · MUSIC EDUCATION",
     title: "Idyani",
-    problem: "Students lacked structured feedback when learning Carnatic music.",
+    problem: "Piano-trained students lacked structured feedback when learning Carnatic music.",
     built:
-      "Electron + Node.js system mapping piano input to swara notation and scoring timing and note placement.",
+      "Electron + Node.js backend converting Western piano input into Carnatic swara notation in real time, with a note-evaluation system scoring timing accuracy and note placement for structured, note-by-note feedback.",
+    detail:
+      "Supports 50+ students, 5 teachers, and 3 composers, with Firebase Auth and session handling for student-teacher bookings, payments, and a teacher dashboard tracking individual progress.",
     stack: ["Electron", "Node.js", "Firebase", "JavaScript"],
     tags: ["Demo coming soon", "Repository private"],
   },
 ];
 
 export const metrics = [
-  { value: "4", label: "products shipped for clients" },
+  { value: "5", label: "products shipped for clients & self" },
+  { value: "85+", label: "users served across Nirman & Idyani" },
   { value: "15", label: "Flutter screens in Nirman" },
-  { value: "1,000+", label: "legal chunks indexed" },
-  { value: "3+", label: "web, mobile, desktop" },
+  { value: "3", label: "specialist agents in one system" },
 ] as const;
 
 export const skillGroups = [
   { label: "LANGUAGES", items: "JavaScript · TypeScript · Python · Dart" },
-  { label: "BACKEND", items: "Node.js · Express · Flask · REST APIs" },
-  { label: "FRONTEND", items: "React · Next.js · Flutter · Electron" },
-  { label: "DATA", items: "MongoDB · Firebase · Firestore" },
-  { label: "AI / RAG", items: "LangChain · Pinecone · Embeddings" },
-  { label: "DELIVERY", items: "Auth · Payments · Real-time state" },
+  { label: "FRONTEND", items: "React · Flutter · Electron" },
+  { label: "BACKEND", items: "Node.js · Express.js · REST APIs · Firebase" },
+  { label: "DATABASES", items: "MongoDB · Firestore · PostgreSQL (pgvector) · Pinecone" },
+  { label: "AI / RAG", items: "LangChain · Multi-Agent Systems · RAG · Embeddings · Vector Search · Prompt Engineering" },
+  { label: "TOOLS", items: "Git · GitHub · Docker · Postman · VS Code" },
 ] as const;
 
 export type Job = {
@@ -111,36 +117,41 @@ export type Job = {
 
 export const experience: Job[] = [
   {
-    time: "2024 — PRESENT",
+    time: "APR 2026 — PRESENT",
     title: "Co-Founder & Lead Developer",
     org: "Lyptron",
     orgUrl: site.company.url,
     summary:
-      "Product studio delivering websites, SaaS, mobile apps, and AI automation.",
+      "Product studio delivering websites, SaaS, mobile apps, and AI automation for founders. Lead all technical development as the sole developer.",
     points: [
-      "Led technical development as the sole developer.",
-      "Scoped and shipped Nirman, Idyani, and Vriddhi Vastra for paying clients.",
+      "Delivered Vriddhi Vastra (Next.js, MongoDB), a full e-commerce site for a silk-saree retailer with a WhatsApp-based order flow in place of a payment gateway.",
+      "Built MadhuPortfolio, a personal portfolio website for a client, live at nmadhukumar.com.",
+      "Delivered Nirman and Idyani, which together now serve 85+ users across construction and music education.",
     ],
   },
   {
     time: "OCT 2025 — PRESENT",
-    title: "Customer Experience & Automation Contributor",
+    title: "Customer Experience & Automation",
     org: "Supertails",
     summary:
-      "Built a React + Flask internal tool using an AI image-detection API for claim review, then onboarded the agent team.",
+      "Supported Supertails' customer-support chatbot by tagging queries with the correct intent and reviewing responses for accuracy and tone.",
+    points: [
+      "Built a standalone tool (React frontend, Flask backend calling a third-party AI-image-detection API) letting agents verify whether a refund/damage claim image is AI-generated before approving a claim.",
+      "Helped onboard other agents onto the claim-image tool when it launched.",
+    ],
   },
   {
     time: "2021 — 2025",
     title: "B.Tech, Mathematics and Computing",
     org: "MSRUAS",
     summary:
-      "Relevant coursework: statistical methods, linear algebra, databases, probability, and operations research.",
+      "Relevant coursework: statistical methods, linear algebra, database systems, probability theory, and operations research.",
   },
 ];
 
 export const facts = [
-  { label: "FOCUS", value: "Backend · AI/RAG" },
+  { label: "FOCUS", value: "Backend · Multi-Agent AI" },
   { label: "EDUCATION", value: "B.Tech Math & Computing" },
-  { label: "EXPERIENCE", value: "Client products since 2024" },
+  { label: "EXPERIENCE", value: "Client products since 2026" },
   { label: "WORK MODE", value: "Remote · Bangalore" },
 ] as const;

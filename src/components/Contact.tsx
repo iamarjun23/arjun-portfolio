@@ -27,6 +27,9 @@ export function Contact() {
         <Button variant="primary" href={`mailto:${site.email}`}>
           {site.email} <span aria-hidden>↗</span>
         </Button>
+        <Button href={`tel:${site.phone.replace(/\s+/g, "")}`}>
+          {site.phone}
+        </Button>
         <Button href={site.linkedin} target="_blank" rel="noopener noreferrer">
           LinkedIn <span aria-hidden>↗</span>
         </Button>
