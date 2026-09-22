@@ -1,38 +1,42 @@
 import type { ReactNode } from "react";
 
+/** Two-column section: the heading holds its place in the left gutter while
+ * the content scrolls past on the right. Stacks on small screens. */
 export function Section({
   id,
   title,
-  intro,
+  description,
   children,
-  labelledBy,
 }: {
-  id?: string;
-  title?: string;
-  intro?: string;
+  id: string;
+  title: string;
+  description?: string;
   children: ReactNode;
-  labelledBy?: string;
 }) {
-  const headingId = id ? `${id}-heading` : labelledBy;
-
   return (
-    <section
-      id={id}
-      aria-labelledby={title ? headingId : undefined}
-      className="shell border-t border-line py-[clamp(68px,7vw,116px)]"
-    >
-      {title && (
-        <div className="reveal mb-8 grid gap-4 border-b border-line pb-6 lg:grid-cols-12 lg:items-end lg:gap-8">
-          <h2
-            id={headingId}
-            className="text-[clamp(32px,3.4vw,52px)] font-semibold tracking-[-0.055em] lg:col-span-5"
-          >
-            {title}
-          </h2>
-          {intro && <p className="max-w-[58ch] text-base text-muted lg:col-span-7 lg:justify-self-end">{intro}</p>}
-        </div>
-      )}
-      {children}
+    <section id={id} aria-labelledby={`${id}-heading`} className="border-t border-line">
+      <div className="container-page grid gap-8 py-16 sm:py-20 lg:grid-cols-12 lg:gap-10">
+        <header className="lg:col-span-3">
+          <div className="lg:sticky lg:top-24">
+            <h2 id={`${id}-heading`} className="text-xl font-semibold tracking-tight">
+              {title}
+            </h2>
+            {description && (
+              <p className="mt-2 max-w-[42ch] text-sm leading-relaxed text-dim">{description}</p>
+            )}
+          </div>
+        </header>
+        <div className="min-w-0 lg:col-span-9">{children}</div>
+      </div>
     </section>
+  );
+}
+
+/** Small rounded label for a technology. */
+export function Tag({ children }: { children: ReactNode }) {
+  return (
+    <li className="rounded-md border border-line bg-sunken px-2 py-0.5 font-mono text-[12px] text-muted">
+      {children}
+    </li>
   );
 }

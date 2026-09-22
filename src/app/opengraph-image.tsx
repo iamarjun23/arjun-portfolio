@@ -16,36 +16,43 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#050505",
-          padding: 72,
-          color: "#F5F7F7",
+          background: "#fbfbfa",
+          padding: 80,
+          color: "#16181d",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <div
             style={{
-              width: 18,
-              height: 18,
-              background: "#20D3EE",
-              transform: "rotate(45deg)",
+              width: 56,
+              height: 56,
+              borderRadius: 12,
+              background: "#16181d",
+              color: "#fbfbfa",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 24,
+              fontWeight: 600,
             }}
-          />
-          <div style={{ fontSize: 26, color: "#72E6F5", letterSpacing: 2 }}>
-            SOFTWARE ENGINEER · BANGALORE / REMOTE
+          >
+            AL
           </div>
+          <div style={{ fontSize: 28, color: "#4a4f59" }}>{site.location}</div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 128, fontWeight: 700, letterSpacing: -6, lineHeight: 1 }}>
+          <div style={{ fontSize: 112, fontWeight: 600, letterSpacing: -4, lineHeight: 1 }}>
             {site.name}
           </div>
-          <div style={{ fontSize: 46, color: "#B5BABB", marginTop: 18, letterSpacing: -1 }}>
-            Backend · AI/RAG · Full-stack
+          <div style={{ fontSize: 44, color: "#4a4f59", marginTop: 20 }}>
+            {`${site.role} · Backend & full-stack`}
           </div>
         </div>
 
-        <div style={{ display: "flex", fontSize: 26, color: "#858B8C" }}>
-          {site.url.replace(/^https?:\/\//, "")}
+        <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 28, color: "#4a4f59" }}>
+          <div style={{ width: 14, height: 14, borderRadius: 7, background: "#178a4c" }} />
+          Open to SDE-1 roles
         </div>
       </div>
     ),

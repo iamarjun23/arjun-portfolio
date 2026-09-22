@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { site } from "@/lib/content";
+import { education, site } from "@/lib/content";
 import "./globals.css";
 
 const geist = Geist({
@@ -26,12 +26,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   keywords: [
     "Arjun L",
-    "software engineer",
+    "software development engineer",
     "backend engineer",
     "full-stack developer",
-    "RAG",
-    "LangChain",
-    "Next.js",
+    "Node.js",
+    "TypeScript",
+    "multi-agent RAG",
     "Bangalore",
   ],
   authors: [{ name: site.name, url: site.url }],
@@ -57,8 +57,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050505",
-  colorScheme: "dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fbfbfa" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e0f11" },
+  ],
 };
 
 const personSchema = {
@@ -69,22 +71,29 @@ const personSchema = {
   description: site.description,
   url: site.url,
   email: `mailto:${site.email}`,
-  sameAs: [site.github, site.linkedin, site.company.url],
+  image: new URL(site.photo, site.url).toString(),
+  sameAs: [site.github, site.linkedin],
   address: { "@type": "PostalAddress", addressLocality: "Bangalore", addressCountry: "IN" },
-  alumniOf: { "@type": "CollegeOrUniversity", name: "MSRUAS" },
+  alumniOf: { "@type": "CollegeOrUniversity", name: education.school },
   worksFor: { "@type": "Organization", name: site.company.name, url: site.company.url },
-  knowsAbout: ["Backend engineering", "Retrieval-augmented generation", "Node.js", "Python", "React", "Flutter"],
+  knowsAbout: ["Backend engineering", "Node.js", "TypeScript", "PostgreSQL", "React", "Flutter", "Retrieval-augmented generation"],
 };
+
+// Runs before first paint so a saved theme never flashes the wrong colours.
+const themeScript = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${geist.variable} ${geistMono.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:border focus:border-brand focus:bg-s2 focus:px-4 focus:py-2 focus:text-sm"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:border focus:border-line focus:bg-surface focus:px-4 focus:py-2 focus:text-sm"
         >
           Skip to content
         </a>

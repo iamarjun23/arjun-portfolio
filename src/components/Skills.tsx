@@ -1,23 +1,24 @@
-import { skillGroups } from "@/lib/content";
-import { Section } from "./Section";
+import { skills } from "@/lib/content";
+import { Section, Tag } from "./Section";
 
 export function Skills() {
   return (
     <Section
       id="skills"
-      title="Technical skills"
-      intro="Tools used to build and ship the work above."
+      title="Skills"
+      description="Everything here has been used in the projects above or in client work."
     >
-      <dl className="reveal grid border-t border-line md:grid-cols-2 xl:grid-cols-3">
-        {skillGroups.map((group) => (
-          <div
-            key={group.label}
-            className="grid grid-cols-[105px_1fr] items-baseline gap-3 border-b border-line py-5 text-[13px] md:odd:border-r md:odd:pr-8 md:even:pl-8 xl:border-r xl:px-8 xl:[&:nth-child(3n+1)]:pl-0 xl:[&:nth-child(3n)]:border-r-0 xl:[&:nth-child(3n)]:pr-0 sm:grid-cols-[120px_1fr] sm:gap-5 sm:text-sm"
-          >
-            <dt className="font-mono text-[11px] leading-[1.5] tracking-[0.04em] text-brand2">
-              {group.label}
-            </dt>
-            <dd className="m-0 leading-[1.65] text-muted">{group.items}</dd>
+      <dl className="divide-y divide-line border-y border-line">
+        {skills.map((row) => (
+          <div key={row.group} className="grid gap-2 py-4 sm:grid-cols-[10rem_1fr] sm:gap-8">
+            <dt className="text-sm font-medium sm:pt-0.5">{row.group}</dt>
+            <dd>
+              <ul className="flex flex-wrap gap-1.5">
+                {row.items.map((item) => (
+                  <Tag key={item}>{item}</Tag>
+                ))}
+              </ul>
+            </dd>
           </div>
         ))}
       </dl>

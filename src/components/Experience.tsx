@@ -1,49 +1,56 @@
+import { LuArrowUpRight } from "react-icons/lu";
 import { experience } from "@/lib/content";
-import { Section } from "./Section";
+import { Section, Tag } from "./Section";
 
 export function Experience() {
   return (
     <Section
       id="experience"
       title="Experience"
-      intro="Commercial product work alongside a mathematics and computing degree."
+      description="Client product work at my own studio, alongside a support-automation role."
     >
-      <ol className="grid">
+      <ol className="space-y-12">
         {experience.map((job) => (
-          <li
-            key={job.title}
-            className="reveal grid gap-1.5 border-b border-line py-8 first:border-t md:grid-cols-12 md:gap-x-8"
-          >
-            <p className="font-mono text-xs text-dim md:col-span-3">
-              <time>{job.time}</time>
-            </p>
-            <div className="md:col-span-9 md:grid md:grid-cols-9 md:gap-8">
-              <h3 className="mb-1.5 flex flex-wrap items-baseline gap-x-2.5 text-xl tracking-[-0.025em] md:col-span-4">
-                <span>
-                  {job.title} · {job.org}
-                </span>
-                {job.orgUrl && (
-                  <a
-                    href={job.orgUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border-b border-brand pb-0.5 font-mono text-xs text-brand2 transition-colors duration-200 hover:text-ink"
-                  >
-                    Visit {job.org} <span aria-hidden>↗</span>
-                  </a>
-                )}
-              </h3>
-              <div className="md:col-span-5">
-              <p className="max-w-[75ch] text-base text-muted">{job.summary}</p>
-              {job.points && (
-                <ul className="mt-2.5 list-disc pl-[18px] text-base text-muted marker:text-line">
+          <li key={job.org}>
+            <article className="grid gap-x-8 gap-y-3 md:grid-cols-[10rem_1fr]">
+              <p className="font-mono text-[13px] text-dim md:pt-1">
+                {job.start} — {job.end}
+              </p>
+              <div>
+                <h3 className="text-lg font-semibold tracking-tight">
+                  {job.role}
+                  <span className="font-normal text-dim"> at </span>
+                  {job.orgUrl ? (
+                    <a
+                      href={job.orgUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link inline-flex items-center gap-0.5"
+                    >
+                      {job.org}
+                      <LuArrowUpRight aria-hidden className="size-4 text-dim" />
+                    </a>
+                  ) : (
+                    job.org
+                  )}
+                </h3>
+                {job.location && <p className="mt-0.5 text-sm text-dim">{job.location}</p>}
+                <p className="mt-3 max-w-[70ch] text-muted">{job.summary}</p>
+                <ul className="mt-4 max-w-[70ch] space-y-2.5">
                   {job.points.map((point) => (
-                    <li key={point}>{point}</li>
+                    <li key={point} className="relative pl-5 text-muted">
+                      <span aria-hidden className="absolute left-0 top-[0.7em] h-px w-2.5 bg-line-strong" />
+                      {point}
+                    </li>
                   ))}
                 </ul>
-              )}
+                <ul aria-label="Technologies" className="mt-5 flex flex-wrap gap-1.5">
+                  {job.stack.map((tech) => (
+                    <Tag key={tech}>{tech}</Tag>
+                  ))}
+                </ul>
               </div>
-            </div>
+            </article>
           </li>
         ))}
       </ol>

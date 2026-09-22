@@ -1,33 +1,85 @@
 @import "tailwindcss";
 
+/* Theme is driven by data-theme on <html>, set before paint by the inline
+   script in layout.tsx. Without JS it falls back to the OS preference. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @theme {
-  --color-bg: #050505;
-  --color-s1: #0b0b0b;
-  --color-s2: #121212;
-  --color-ink: #f5f7f7;
-  --color-muted: #b5babb;
-  --color-dim: #858b8c;
-  --color-line: #2a2d2e;
-  --color-brand: #20d3ee;
-  --color-brand2: #72e6f5;
-  --color-wash: rgba(32, 211, 238, 0.1);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-dim: var(--dim);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-ok: var(--ok);
 
   --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
 }
 
+:root {
+  color-scheme: light;
+  --bg: #fbfbfa;
+  --surface: #ffffff;
+  --sunken: #f3f3f1;
+  --ink: #16181d;
+  --muted: #4a4f59;
+  --dim: #6b7079;
+  --line: #e5e5e1;
+  --line-strong: #cfcfca;
+  --accent: #1f4fb8;
+  --accent-soft: #e9effb;
+  --ok: #178a4c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0e0f11;
+    --surface: #15171a;
+    --sunken: #121316;
+    --ink: #ecedef;
+    --muted: #a9adb5;
+    --dim: #868b94;
+    --line: #25282d;
+    --line-strong: #363a41;
+    --accent: #8fb1ff;
+    --accent-soft: #1a2436;
+    --ok: #4cc38a;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0e0f11;
+  --surface: #15171a;
+  --sunken: #121316;
+  --ink: #ecedef;
+  --muted: #a9adb5;
+  --dim: #868b94;
+  --line: #25282d;
+  --line-strong: #363a41;
+  --accent: #8fb1ff;
+  --accent-soft: #1a2436;
+  --ok: #4cc38a;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Sticky header offset so anchor targets are not tucked under the nav. */
-    scroll-padding-top: 5.5rem;
+    scroll-padding-top: 5rem;
     -webkit-text-size-adjust: 100%;
   }
 
   body {
-    background: var(--color-bg);
-    color: var(--color-ink);
+    background: var(--bg);
+    color: var(--ink);
     font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
     line-height: 1.6;
     text-wrap: pretty;
   }
@@ -39,14 +91,21 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-brand2);
-    outline-offset: 3px;
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
     border-radius: 4px;
   }
 
   ::selection {
-    background: var(--color-brand);
-    color: #031014;
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  summary {
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -63,38 +122,63 @@
   }
 }
 
-@utility shell {
-  width: calc(100% - clamp(2rem, 6vw, 7rem));
+@utility container-page {
+  width: 100%;
+  max-width: 72rem;
   margin-inline: auto;
+  padding-inline: 1.25rem;
 
-  @media (width <= 600px) {
-    width: calc(100% - 2rem);
+  @media (width >= 640px) {
+    padding-inline: 2rem;
   }
 }
 
-/**
- * Scroll reveal, done with CSS scroll-driven animations instead of an
- * IntersectionObserver. Zero JS, and content is visible by default — so it
- * still reads correctly with JS disabled, in unsupported browsers, and under
- * prefers-reduced-motion.
- */
-@utility reveal {
-  @supports (animation-timeline: view()) {
-    @media (prefers-reduced-motion: no-preference) {
-      animation: reveal-in linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 18%;
-    }
+/* Inline text link: underline that sits below descenders and darkens on hover. */
+@utility link {
+  color: var(--ink);
+  text-decoration-line: underline;
+  text-decoration-color: var(--line-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 150ms ease;
+
+  &:hover {
+    text-decoration-color: currentColor;
   }
 }
 
-@keyframes reveal-in {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
+/* Print: the page doubles as a one-click résumé. */
+@media print {
+  :root,
+  :root[data-theme="dark"] {
+    --bg: #fff;
+    --surface: #fff;
+    --sunken: #fff;
+    --ink: #000;
+    --muted: #222;
+    --dim: #444;
+    --line: #ccc;
+    --line-strong: #999;
+    --accent: #000;
+    --accent-soft: #fff;
   }
-  to {
-    opacity: 1;
-    transform: none;
+
+  html {
+    font-size: 12px;
+  }
+
+  /* Closed <details> would hide the architecture notes on paper. */
+  details::details-content {
+    content-visibility: visible;
+    display: block;
+  }
+
+  section {
+    break-inside: avoid-page;
+  }
+
+  article,
+  li {
+    break-inside: avoid;
   }
 }
