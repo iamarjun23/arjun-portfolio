@@ -1,105 +1,89 @@
 import { projects } from "@/lib/content";
-import type { IconType } from "react-icons";
-import {
-  SiDart,
-  SiElectron,
-  SiExpress,
-  SiFirebase,
-  SiFlutter,
-  SiJavascript,
-  SiLangchain,
-  SiMongodb,
-  SiNodedotjs,
-  SiPython,
-  SiRazorpay,
-  SiReact,
-} from "react-icons/si";
 import { Section } from "./Section";
-
-const techIcons: Record<string, { Icon: IconType; color: string }> = {
-  React: { Icon: SiReact, color: "#61DAFB" },
-  Python: { Icon: SiPython, color: "#FFD43B" },
-  LangChain: { Icon: SiLangchain, color: "#FFFFFF" },
-  Express: { Icon: SiExpress, color: "#FFFFFF" },
-  MongoDB: { Icon: SiMongodb, color: "#47A248" },
-  Flutter: { Icon: SiFlutter, color: "#54C5F8" },
-  Dart: { Icon: SiDart, color: "#0175C2" },
-  Firebase: { Icon: SiFirebase, color: "#FFCA28" },
-  Firestore: { Icon: SiFirebase, color: "#FFCA28" },
-  Razorpay: { Icon: SiRazorpay, color: "#3395FF" },
-  Electron: { Icon: SiElectron, color: "#9FEAF9" },
-  "Node.js": { Icon: SiNodedotjs, color: "#5FA04E" },
-  JavaScript: { Icon: SiJavascript, color: "#F7DF1E" },
-};
+import { TechChip } from "./TechIcon";
 
 export function Work() {
   return (
     <Section
       id="work"
       title="Selected work"
-      intro="Three products where I owned meaningful parts of the system from repository to delivery."
+      intro="Four products where I owned meaningful parts of the system, from repository to delivery."
     >
-      <ul className="grid">
-        {projects.map((project, index) => (
-          <li
-            key={project.title}
-            className="reveal grid gap-x-8 gap-y-5 border-b border-line py-10 lg:grid-cols-12"
-          >
-            <p className="font-mono text-xs text-dim lg:col-span-1 lg:pt-1">
-              0{index + 1}
-            </p>
-            <div className="lg:col-span-7">
-              <p className="mb-3 font-mono text-[11px] text-brand2">{project.meta}</p>
-              <h3 className="mb-3 text-[clamp(26px,2.6vw,42px)] tracking-[-0.045em]">{project.title}</h3>
-              <p className="max-w-[78ch] text-base text-muted">
-                <b className="font-medium text-ink">Problem:</b> {project.problem}{" "}
-                <b className="font-medium text-ink">Built:</b> {project.built}
-                {project.detail && (
-                  <>
-                    {" "}
-                    <b className="font-medium text-ink">Detail:</b> {project.detail}
-                  </>
+      <ol className="grid gap-5">
+        {projects.map((p, i) => {
+          const rows = [
+            ["Problem", p.problem],
+            ["What I built", p.built],
+            ["Outcome", p.outcome],
+            ["Stack", p.stack.join(" · ")],
+          ].filter(([, text]) => text);
+
+          return (
+            <li key={p.id} id={p.id} className="reveal scroll-mt-24 rounded-2xl border border-line bg-card p-[clamp(20px,3vw,36px)]">
+              <header className="flex flex-wrap items-start justify-between gap-x-8 gap-y-4 border-b border-line pb-6">
+                <div>
+                  <p className="font-mono text-xs text-dim">0{i + 1}</p>
+                  <h3 className="mt-1.5 text-[clamp(24px,2.4vw,32px)] font-semibold leading-tight tracking-[-0.035em]">{p.title}</h3>
+                  <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 text-[15px] text-muted">
+                    <span>
+                      {p.role} · {p.client} · {p.year}
+                    </span>
+                    {p.tags.map((tag) => (
+                      <span key={tag} className="tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </p>
+                </div>
+                {p.links && (
+                  <ul className="flex flex-wrap gap-2">
+                    {p.links.map((link) => (
+                      <li key={link.href}>
+                        <a
+                          href={link.href}
+                          {...(link.href.startsWith("http") && { target: "_blank", rel: "noopener noreferrer" })}
+                          className="inline-flex min-h-9 items-center rounded-lg border border-line px-3 text-sm font-medium transition-colors hover:border-brand hover:text-brand"
+                        >
+                          {link.label} ↗
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 )}
-              </p>
-            </div>
+              </header>
 
-            <div className="border-line pt-4 max-lg:border-t lg:col-span-4 lg:border-l lg:pl-8 lg:pt-0">
-              <h4 className="mb-2.5 font-mono text-xs text-dim">STACK</h4>
-              <ul className="flex flex-wrap gap-x-5 gap-y-3">
-                {project.stack.map((tech) => {
-                  const icon = techIcons[tech];
-
-                  return (
-                    <li
-                      key={tech}
-                      className="flex items-center gap-2 font-mono text-xs text-muted transition-colors duration-200 hover:text-ink"
+              <dl className="divide-y divide-line">
+                {rows.map(([label, text]) => (
+                  <div key={label} className="grid gap-1 py-4 last:pb-0 sm:grid-cols-[140px_1fr] sm:gap-6">
+                    <dt className="text-sm text-dim">{label}</dt>
+                    <dd
+                      className={
+                        label === "Outcome"
+                          ? "font-medium text-ink"
+                          : "text-muted"
+                      }
                     >
-                      {icon && (
-                        <icon.Icon
-                          aria-hidden
-                          className="size-[18px] shrink-0"
-                          style={{ color: icon.color }}
-                        />
-                      )}
-                      {tech}
-                    </li>
-                  );
-                })}
-              </ul>
-              <ul className="mt-4 flex flex-wrap gap-1.5">
-                {project.tags.map((tag) => (
-                  <li
-                    key={tag}
-                    className="rounded-[5px] border border-dashed border-line px-1.5 py-1 font-mono text-[11px] text-dim"
-                  >
-                    {tag}
-                  </li>
+                      {text}
+                    </dd>
+                  </div>
                 ))}
-              </ul>
-            </div>
-          </li>
-        ))}
-      </ul>
+                <div className="grid gap-1 py-4 last:pb-0 sm:grid-cols-[140px_1fr] sm:gap-6">
+                  <dt className="text-sm text-dim">Stack</dt>
+                  <dd>
+                    <ul className="flex flex-wrap gap-2">
+                      {p.stack.map((s) => (
+                        <li key={s}>
+                          <TechChip name={s} />
+                        </li>
+                      ))}
+                    </ul>
+                  </dd>
+                </div>
+              </dl>
+            </li>
+          );
+        })}
+      </ol>
     </Section>
   );
 }

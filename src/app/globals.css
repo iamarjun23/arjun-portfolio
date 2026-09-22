@@ -1,19 +1,72 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #050505;
-  --color-s1: #0b0b0b;
-  --color-s2: #121212;
-  --color-ink: #f5f7f7;
-  --color-muted: #b5babb;
-  --color-dim: #858b8c;
-  --color-line: #2a2d2e;
-  --color-brand: #20d3ee;
-  --color-brand2: #72e6f5;
-  --color-wash: rgba(32, 211, 238, 0.1);
+  --color-bg: #fafaf8;
+  --color-s1: #f3f2ee;
+  --color-s2: #ecebe6;
+  --color-card: #ffffff;
+  --color-ink: #0a0a0a;
+  --color-muted: #52524e;
+  --color-dim: #6b6b66;
+  --color-line: #e2e1dc;
+  --color-brand: #2440f0;
+  --color-brand2: #1a30c4;
+  --color-wash: rgba(36, 64, 240, 0.06);
 
-  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-geist), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+}
+
+/* Night mode: follows the OS until the visitor picks one with the nav toggle. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+  --color-bg: #0a0a0a;
+  --color-s1: #111111;
+  --color-s2: #181818;
+  --color-card: #111111;
+  --color-ink: #ededed;
+  --color-muted: #a1a1a1;
+  --color-dim: #8a8a8a;
+  --color-line: #262626;
+  --color-brand: #7b8cff;
+  --color-brand2: #a3aeff;
+  --color-wash: rgba(123, 140, 255, 0.08);
+  color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-bg: #0a0a0a;
+  --color-s1: #111111;
+  --color-s2: #181818;
+  --color-card: #111111;
+  --color-ink: #ededed;
+  --color-muted: #a1a1a1;
+  --color-dim: #8a8a8a;
+  --color-line: #262626;
+  --color-brand: #7b8cff;
+  --color-brand2: #a3aeff;
+  --color-wash: rgba(123, 140, 255, 0.08);
+  color-scheme: dark;
+}
+
+/* Toggle icon: show the moon in light mode, the sun in dark mode. */
+.theme-sun {
+  display: none;
+}
+:root[data-theme="dark"] .theme-sun {
+  display: block;
+}
+:root[data-theme="dark"] .theme-moon {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-sun {
+    display: block;
+  }
+  :root:not([data-theme="light"]) .theme-moon {
+    display: none;
+  }
 }
 
 @layer base {
@@ -25,7 +78,7 @@
   }
 
   body {
-    background: var(--color-bg);
+    background-color: var(--color-bg);
     color: var(--color-ink);
     font-family: var(--font-sans);
     line-height: 1.6;
@@ -46,14 +99,7 @@
 
   ::selection {
     background: var(--color-brand);
-    color: #031014;
-  }
-
-  @media (pointer: fine) and (hover: hover) and (prefers-reduced-motion: no-preference) {
-    .has-brand-cursor,
-    .has-brand-cursor * {
-      cursor: none !important;
-    }
+    color: #fff;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -70,67 +116,31 @@
   }
 }
 
-@layer components {
-  .brand-cursor {
-    pointer-events: none;
-    position: fixed;
-    inset: 0 auto auto 0;
-    z-index: 60;
-    display: grid;
-    width: 2rem;
-    height: 2rem;
-    place-items: center;
-    opacity: 0;
-    transition: opacity 150ms ease;
-    will-change: transform;
-  }
-
-  .brand-cursor[data-visible="true"] {
-    opacity: 1;
-  }
-
-  .brand-cursor__diamond {
-    position: absolute;
-    width: 1.15rem;
-    height: 1.15rem;
-    border: 1px solid rgba(114, 230, 245, 0.86);
-    background: rgba(32, 211, 238, 0.06);
-    box-shadow: 0 0 18px rgba(32, 211, 238, 0.3);
-    transform: rotate(45deg);
-    transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
-  }
-
-  .brand-cursor__dot {
-    width: 0.25rem;
-    height: 0.25rem;
-    border-radius: 999px;
-    background: var(--color-ink);
-    box-shadow: 0 0 8px rgba(234, 250, 255, 0.72);
-    transition: transform 120ms ease, background 120ms ease;
-  }
-
-  .brand-cursor[data-interactive="true"] .brand-cursor__diamond {
-    border-color: var(--color-brand2);
-    background: rgba(32, 211, 238, 0.2);
-    transform: rotate(135deg) scale(1.45);
-  }
-
-  .brand-cursor[data-interactive="true"] .brand-cursor__dot {
-    background: var(--color-brand2);
-    transform: scale(0.7);
-  }
-
-  .brand-cursor[data-pressed="true"] .brand-cursor__diamond {
-    transform: rotate(135deg) scale(0.82);
-  }
-}
-
 @utility shell {
-  width: calc(100% - clamp(2rem, 6vw, 7rem));
+  width: calc(100% - clamp(3rem, 16vw, 22rem));
   margin-inline: auto;
 
   @media (width <= 600px) {
-    width: calc(100% - 2rem);
+    width: calc(100% - 3rem);
+  }
+}
+
+/* Boxless label for tags and badges site-wide: mono caps led by a slash. */
+@utility tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+
+  &::before {
+    content: "/";
+    margin-right: 0.45em;
+    color: var(--color-dim);
+    opacity: 0.6;
   }
 }
 
@@ -147,6 +157,51 @@
       animation-timeline: view();
       animation-range: entry 0% cover 18%;
     }
+  }
+}
+
+/* Case study: recruiter view hides engineering-only blocks (SSR default, no flash). */
+[data-view="recruiter"] .eng {
+  display: none;
+}
+
+/* Section progress bar under the sticky nav — scroll-driven, zero JS. */
+.scroll-progress {
+  transform: scaleX(0);
+  @supports (animation-timeline: scroll()) {
+    animation: grow linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes grow {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Hero status underline: shrinks from full width to nothing and back. */
+.status-line {
+  transform-origin: left;
+  animation: status-line 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes status-line {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* Flow pulse in the hero diagram. */
+@keyframes flow {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(300%);
   }
 }
 

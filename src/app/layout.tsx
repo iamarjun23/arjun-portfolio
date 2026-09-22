@@ -5,13 +5,12 @@ import "./globals.css";
 
 const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-geist-sans",
+  variable: "--font-geist",
   display: "swap",
 });
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
   variable: "--font-geist-mono",
   display: "swap",
 });
@@ -26,6 +25,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   keywords: [
     "Arjun L",
+    "ArjunL",
+    "arjunl",
+    "Arjun L portfolio",
+    "Arjun L software engineer",
+    "Arjun L Lyptron",
+    "iamarjun23",
     "software engineer",
     "backend engineer",
     "full-stack developer",
@@ -49,6 +54,8 @@ export const metadata: Metadata = {
     title: site.title,
     description: site.description,
   },
+  // Set NEXT_PUBLIC_GOOGLE_VERIFICATION to the Search Console token to verify ownership.
+  verification: { google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION },
   robots: {
     index: true,
     follow: true,
@@ -57,14 +64,16 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050505",
-  colorScheme: "dark",
+  themeColor: "#0a0a0a",
+  colorScheme: "dark light",
 };
 
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: site.name,
+  alternateName: ["ArjunL", "arjunl", "iamarjun23"],
+  image: `${site.url}${site.photo}`,
   jobTitle: site.role,
   description: site.description,
   url: site.url,
@@ -76,11 +85,27 @@ const personSchema = {
   knowsAbout: ["Backend engineering", "Retrieval-augmented generation", "Node.js", "Python", "React", "Flutter"],
 };
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.name,
+  alternateName: ["ArjunL", "arjunl"],
+  url: site.url,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable} ${geistMono.variable}`}>
+    <html lang="en" data-theme="dark" suppressHydrationWarning className={`${geist.variable} ${geistMono.variable}`}>
+      <head>
+        {/* Apply the saved theme before first paint so there is no flash. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="antialiased">
         <a
           href="#main"
@@ -92,7 +117,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           suppressHydrationWarning
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([personSchema, websiteSchema]) }}
         />
       </body>
     </html>

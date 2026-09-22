@@ -22,10 +22,10 @@ export function Section({
       className="shell border-t border-line py-[clamp(68px,7vw,116px)]"
     >
       {title && (
-        <div className="reveal mb-8 grid gap-4 border-b border-line pb-6 lg:grid-cols-12 lg:items-end lg:gap-8">
+        <div className="reveal mb-10 grid gap-4 lg:grid-cols-12 lg:items-end lg:gap-8">
           <h2
             id={headingId}
-            className="text-[clamp(32px,3.4vw,52px)] font-semibold tracking-[-0.055em] lg:col-span-5"
+            className="text-[clamp(36px,4vw,60px)] leading-none font-semibold tracking-[-0.04em] lg:col-span-5"
           >
             {title}
           </h2>

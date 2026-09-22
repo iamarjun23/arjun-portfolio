@@ -16,9 +16,9 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#050505",
+          background: "#FAFAF8",
           padding: 72,
-          color: "#F5F7F7",
+          color: "#0A0A0A",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
@@ -26,11 +26,11 @@ export default function OpengraphImage() {
             style={{
               width: 18,
               height: 18,
-              background: "#20D3EE",
+              background: "#2440F0",
               transform: "rotate(45deg)",
             }}
           />
-          <div style={{ fontSize: 26, color: "#72E6F5", letterSpacing: 2 }}>
+          <div style={{ fontSize: 26, color: "#1A30C4", letterSpacing: 2 }}>
             SOFTWARE ENGINEER · BANGALORE / REMOTE
           </div>
         </div>
@@ -39,12 +39,12 @@ export default function OpengraphImage() {
           <div style={{ fontSize: 128, fontWeight: 700, letterSpacing: -6, lineHeight: 1 }}>
             {site.name}
           </div>
-          <div style={{ fontSize: 46, color: "#B5BABB", marginTop: 18, letterSpacing: -1 }}>
+          <div style={{ fontSize: 46, color: "#52524E", marginTop: 18, letterSpacing: -1 }}>
             Backend · AI/RAG · Full-stack
           </div>
         </div>
 
-        <div style={{ display: "flex", fontSize: 26, color: "#858B8C" }}>
+        <div style={{ display: "flex", fontSize: 26, color: "#6B6B66" }}>
           {site.url.replace(/^https?:\/\//, "")}
         </div>
       </div>

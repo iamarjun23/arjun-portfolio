@@ -1,116 +1,81 @@
 import Image from "next/image";
 import { hero, site } from "@/lib/content";
-
-function PhotoPanel() {
-  return (
-    <div className="relative aspect-square w-full overflow-hidden bg-[linear-gradient(160deg,#20d3ee_0%,#087d8f_100%)]">
-      <span
-        aria-hidden
-        className="pointer-events-none absolute bottom-6 -right-1 select-none text-[clamp(52px,6vw,86px)] font-bold leading-none tracking-[-0.08em] text-black/20 [writing-mode:vertical-rl] [transform:rotate(180deg)]"
-      >
-        {site.name.toUpperCase()}
-      </span>
-
-      {site.photo ? (
-        <Image
-          src={site.photo}
-          alt={`${site.name}, software engineer`}
-          fill
-          preload
-          unoptimized
-          sizes="(max-width: 1024px) 100vw, 30vw"
-          className="object-cover object-center"
-        />
-      ) : (
-        <>
-          <span className="absolute left-6 top-6 font-mono text-[11px] tracking-[0.08em] text-white/70">
-            YOUR PHOTO
-          </span>
-          <div className="grid h-[310px] w-[210px] max-h-[70%] place-items-center rounded-t-[106px] border border-dashed border-[rgba(244,245,248,0.65)] bg-[linear-gradient(150deg,rgba(244,245,248,0.75),rgba(244,245,248,0.23))] font-mono text-xs text-[rgba(244,245,248,0.88)]">
-            PHOTO PLACEHOLDER
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
-
-function Mockup() {
-  return (
-    <div
-      aria-hidden
-      className="mb-8 h-[clamp(160px,27vh,220px)] -rotate-[4deg] overflow-hidden rounded-sm bg-[linear-gradient(145deg,#edf1f2,#777d7f)] p-4.5 shadow-[0_20px_55px_rgba(0,0,0,0.45)]"
-    >
-      <div className="mb-4 h-2 w-[38%] rounded-full bg-[#20d3ee]" />
-      <div className="grid grid-cols-2 gap-3">
-        <div className="h-[68px] rounded-lg bg-white/75" />
-        <div className="h-[68px] rounded-lg bg-white/75" />
-        <div className="col-span-2 h-[38px] rounded-lg bg-white/75" />
-      </div>
-    </div>
-  );
-}
+import { Button } from "./Button";
 
 export function Hero() {
   return (
-    <section
-      id="top"
-      aria-label="Introduction"
-      className="shell grid gap-10 py-[clamp(42px,6vw,76px)] lg:grid-cols-12 lg:items-center lg:gap-0"
-    >
-      <div className="flex flex-col justify-center lg:col-span-4 lg:pr-[clamp(28px,4vw,72px)]">
-        <div>
-          <p className="font-mono text-xs font-medium tracking-[0.04em] text-brand2">
-            {hero.kicker}
+    <section id="top" aria-label="Introduction" className="shell pb-[clamp(40px,5vw,72px)] pt-[clamp(32px,4vw,56px)]">
+      {/* Mobile keeps the desktop two-column read: text column flattens into the grid so the photo sits beside the greeting. */}
+      <div className="grid grid-cols-[1fr_auto] gap-x-4 lg:grid-cols-12 lg:items-center lg:gap-10">
+        <div className="max-lg:contents lg:col-span-8">
+          <p className="self-center text-[15px] leading-snug text-muted sm:text-lg">
+            Hi, I&rsquo;m {site.name} — currently{" "}
+            <span className="relative whitespace-nowrap text-ink">
+              {hero.status}
+              <span aria-hidden className="status-line absolute inset-x-0 -bottom-1 h-0.5 bg-emerald-500" />
+            </span>
           </p>
-          <h1 className="my-3 text-[clamp(58px,6vw,112px)] font-semibold leading-[0.9] tracking-[-0.075em]">
-            {site.name}
-          </h1>
-          <p className="text-[clamp(20px,2.4vw,33px)] leading-[1.1] tracking-[-0.035em] text-muted">
-            {hero.role[0]}
-            <br />
-            {hero.role[1]}
-          </p>
-        </div>
 
-      </div>
-
-      <div className="overflow-hidden border-line lg:col-span-4 lg:border-x">
-        <div className="border-b border-line bg-s1 px-[clamp(22px,2.5vw,40px)] py-[clamp(22px,2.8vw,38px)]">
-          <h2 className="mb-3 font-mono text-xs font-medium tracking-[0.05em] text-brand2">
-            ABOUT ME
-          </h2>
-          <p className="max-w-[46ch] text-base leading-relaxed text-muted">
-            {hero.about}
-          </p>
-        </div>
-        <PhotoPanel />
-      </div>
-
-      <div className="flex flex-col justify-center lg:col-span-4 lg:pl-[clamp(28px,4vw,72px)] max-lg:gap-7 max-lg:grid max-lg:grid-cols-2 max-sm:grid-cols-1">
-        <Mockup />
-        <div className="self-center">
-          <p className="font-mono text-xs font-medium tracking-[0.04em] text-brand2">
-            {hero.featured.kicker}
-          </p>
-          <h2 className="mb-2 mt-1.5 text-xl tracking-[-0.035em]">
-            {hero.featured.title}
-          </h2>
-          <p className="mb-4 max-w-[48ch] text-[15px] text-muted">
-            {hero.featured.blurb}
-          </p>
-          <ul className="flex flex-wrap gap-2">
-            {hero.featured.tags.map((tag) => (
-              <li
-                key={tag}
-                className="rounded-md border border-dashed border-line px-2.5 py-1.5 font-mono text-[11px] text-dim"
+          <h1 className="mt-5 max-lg:col-span-2">
+            <span className="block max-w-[18ch] text-[clamp(36px,4.4vw,72px)] font-semibold leading-[1.02] tracking-[-0.04em]">
+              I build backends and AI systems, and run engineering at{" "}
+              <a
+                href={site.company.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand decoration-2 underline-offset-[0.12em] hover:underline"
               >
-                {tag}
-              </li>
-            ))}
-          </ul>
+                Lyptron
+              </a>
+              .
+            </span>
+          </h1>
+
+          <p className="mt-5 max-w-[60ch] text-base sm:text-lg max-lg:col-span-2 leading-relaxed text-muted">{hero.about}</p>
+
+          <div className="mt-7 flex flex-wrap gap-2 sm:gap-3 max-lg:col-span-2">
+            <Button variant="primary" href={`mailto:${site.email}`}>
+              Email me
+            </Button>
+            <Button href={site.github} target="_blank" rel="noopener noreferrer">
+              GitHub ↗
+            </Button>
+            <Button href={site.linkedin} target="_blank" rel="noopener noreferrer">
+              LinkedIn ↗
+            </Button>
+          </div>
         </div>
+
+        {site.photo && (
+          <figure className="col-start-2 row-start-1 w-24 sm:w-40 lg:col-span-4 lg:col-start-auto lg:row-start-auto lg:w-auto">
+            <Image
+              src={site.photo}
+              alt={`${site.name}, software engineer`}
+              width={1254}
+              height={1254}
+              preload
+              unoptimized
+              className="aspect-square w-full lg:max-h-[58vh] object-cover object-top grayscale-[35%]"
+            />
+            <figcaption className="mt-3 hidden lg:flex justify-between font-mono text-[11px] uppercase tracking-[0.08em] text-dim">
+              <span>{site.role}</span>
+              <span>{site.location}</span>
+            </figcaption>
+          </figure>
+        )}
       </div>
+
+      <dl className="mt-10 grid lg:mt-12 grid-cols-2 border-t border-line lg:grid-cols-4">
+        {hero.highlights.map((h) => (
+          <div key={h.label} className="border-line pt-4 pr-4 pb-2 max-lg:[&:nth-child(-n+2)]:pb-4 max-lg:even:border-l max-lg:even:pl-4 lg:pt-5 lg:pr-6 lg:border-l lg:pl-6 lg:first:border-l-0 lg:first:pl-0">
+            <dt className="font-mono text-[11px] uppercase tracking-[0.08em] text-dim">{h.label}</dt>
+            <dd className="mt-2">
+              <p className="font-medium">{h.value}</p>
+              <p className="text-sm text-muted">{h.note}</p>
+            </dd>
+          </div>
+        ))}
+      </dl>
     </section>
   );
 }

@@ -14,17 +14,15 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#050505",
+          background: "#0a0a0a",
+          color: "#ededed",
+          fontSize: 20,
+          fontWeight: 700,
+          letterSpacing: -1,
         }}
       >
-        <div
-          style={{
-            width: 16,
-            height: 16,
-            background: "#20D3EE",
-            transform: "rotate(45deg)",
-          }}
-        />
+        A
+        <div style={{ width: 5, height: 5, marginLeft: 1, marginTop: 10, borderRadius: 5, background: "#10b981" }} />
       </div>
     ),
     size,
