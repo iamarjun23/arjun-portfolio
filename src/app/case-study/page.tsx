@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { Section } from "@/components/Section";
 import { cs } from "@/lib/case-study";
 import { site } from "@/lib/content";
+import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
 
 export const metadata: Metadata = {
   title: cs.meta.title,
@@ -123,15 +124,15 @@ export default function CaseStudy() {
             <div className="mt-9 flex flex-wrap gap-2.5">
               {cs.demo ? (
                 <Button variant="primary" href={cs.demo} {...ext}>
-                  View live project <span aria-hidden>↗</span>
+                  View live project <FiArrowUpRight aria-hidden className="inline size-[1em] shrink-0 align-[-0.125em]" />
                 </Button>
               ) : (
                 <Button variant="primary" href={cs.quickstart} {...ext}>
-                  Run it locally <span aria-hidden>↗</span>
+                  Run it locally <FiArrowUpRight aria-hidden className="inline size-[1em] shrink-0 align-[-0.125em]" />
                 </Button>
               )}
               <Button href={cs.repo} {...ext}>
-                View code <span aria-hidden>↗</span>
+                View code <FiArrowUpRight aria-hidden className="inline size-[1em] shrink-0 align-[-0.125em]" />
               </Button>
               <Button href="#contact">Contact me</Button>
             </div>
@@ -407,7 +408,7 @@ export default function CaseStudy() {
                   <span className="text-xl font-medium tracking-[-0.02em]">{s.t}</span>
                   <span className="text-base text-muted">{s.e}</span>
                   <span className="mt-auto pt-2 font-mono text-[14px] text-brand2">
-                    See evidence <span aria-hidden className="inline-block transition-transform group-hover:translate-x-1">→</span>
+                    See evidence <FiArrowRight aria-hidden className="inline size-[1em] shrink-0 align-[-0.125em] transition-transform group-hover:translate-x-1" />
                   </span>
                 </a>
               </li>
@@ -424,19 +425,19 @@ export default function CaseStudy() {
           <p className="mb-8 max-w-[60ch] text-lg text-muted">{cs.cta.sub}</p>
           <div className="flex flex-wrap gap-2.5">
             <Button variant="primary" href={`mailto:${site.email}`}>
-              {site.email} <span aria-hidden>↗</span>
+              {site.email} <FiArrowUpRight aria-hidden className="inline size-[1em] shrink-0 align-[-0.125em]" />
             </Button>
             <Button href={site.resume} {...ext}>
-              Resume <span aria-hidden>↗</span>
+              Resume <FiArrowUpRight aria-hidden className="inline size-[1em] shrink-0 align-[-0.125em]" />
             </Button>
             <Button href={cs.demo ?? cs.quickstart} {...ext}>
-              {cs.demo ? "Live demo" : "Run the demo"} <span aria-hidden>↗</span>
+              {cs.demo ? "Live demo" : "Run the demo"} <FiArrowUpRight aria-hidden className="inline size-[1em] shrink-0 align-[-0.125em]" />
             </Button>
             <Button href={cs.repo} {...ext}>
-              Repository <span aria-hidden>↗</span>
+              Repository <FiArrowUpRight aria-hidden className="inline size-[1em] shrink-0 align-[-0.125em]" />
             </Button>
             <Button href={site.linkedin} {...ext}>
-              LinkedIn <span aria-hidden>↗</span>
+              LinkedIn <FiArrowUpRight aria-hidden className="inline size-[1em] shrink-0 align-[-0.125em]" />
             </Button>
           </div>
         </section>

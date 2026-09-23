@@ -59,9 +59,6 @@ export const metadata: Metadata = {
     description: site.description,
     creator: "@iamarjun23",
   },
-  icons: {
-    icon: [{ url: "/icon", type: "image/png", sizes: "64x64" }],
-  },
   // Set NEXT_PUBLIC_GOOGLE_VERIFICATION to the Search Console token to verify ownership.
   verification: { google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION },
   robots: {

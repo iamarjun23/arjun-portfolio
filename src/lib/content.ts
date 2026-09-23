@@ -18,7 +18,7 @@ export const site = {
   company: { name: "Lyptron", url: "https://lyptron.com/" },
   // Drop the PDF at portfolio/public/arjun-l-resume.pdf and this button goes live.
   resume: "/arjun-l-resume.pdf",
-  photo: "/arjun-headshot.png" as string | null,
+  photo: "/arjun-headshot.webp" as string | null,
 } as const;
 
 export const nav = [

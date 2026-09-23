@@ -1,5 +1,6 @@
 import { lyptron, site } from "@/lib/content";
 import { Fold } from "./Fold";
+import { FiArrowDown, FiArrowUpRight } from "react-icons/fi";
 
 export function Lyptron() {
   return (
@@ -22,7 +23,7 @@ export function Lyptron() {
             rel="noopener noreferrer"
             className="mt-6 inline-block border-b border-brand pb-0.5 text-sm text-brand hover:text-ink"
           >
-            lyptron.com ↗
+            lyptron.com <FiArrowUpRight aria-hidden className="inline size-[1em] shrink-0 align-[-0.125em]" />
           </a>
         </div>
 
@@ -50,7 +51,7 @@ export function Lyptron() {
                   <span className="text-lg font-semibold tracking-[-0.02em] text-ink sm:text-xl">{p.name}</span>
                   <span className="text-right text-sm text-muted sm:text-[15px]">
                     {p.note}
-                    {"href" in p && <span aria-hidden className="ml-2 text-dim transition-colors group-hover:text-brand">↓</span>}
+                    {"href" in p && <FiArrowDown aria-hidden className="ml-2 inline size-[1em] shrink-0 align-[-0.125em] text-dim transition-colors group-hover:text-brand" />}
                   </span>
                 </>
               );

@@ -1,5 +1,6 @@
 import { site } from "@/lib/content";
 import { Button } from "./Button";
+import { FiArrowUpRight } from "react-icons/fi";
 
 export function Contact() {
   return (
@@ -25,13 +26,13 @@ export function Contact() {
         </p>
         <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap">
         <Button variant="primary" href={`mailto:${site.email}`} className="col-span-2">
-          {site.email} <span aria-hidden>↗</span>
+          {site.email} <FiArrowUpRight aria-hidden className="inline size-[1em] shrink-0 align-[-0.125em]" />
         </Button>
         <Button href={site.linkedin} target="_blank" rel="noopener noreferrer">
-          LinkedIn <span aria-hidden>↗</span>
+          LinkedIn <FiArrowUpRight aria-hidden className="inline size-[1em] shrink-0 align-[-0.125em]" />
         </Button>
         <Button href={site.github} target="_blank" rel="noopener noreferrer">
-          GitHub <span aria-hidden>↗</span>
+          GitHub <FiArrowUpRight aria-hidden className="inline size-[1em] shrink-0 align-[-0.125em]" />
         </Button>
         </div>
       </div>

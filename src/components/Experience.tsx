@@ -1,5 +1,6 @@
 import { experience } from "@/lib/content";
 import { Section } from "./Section";
+import { FiArrowUpRight } from "react-icons/fi";
 
 export function Experience() {
   return (
@@ -44,7 +45,7 @@ export function Experience() {
                     rel="noopener noreferrer"
                     className="mt-4 inline-block text-sm font-medium text-brand hover:underline"
                   >
-                    {job.orgUrl.replace(/^https?:\/\/|\/$/g, "")} ↗
+                    {job.orgUrl.replace(/^https?:\/\/|\/$/g, "")} <FiArrowUpRight aria-hidden className="inline size-[1em] shrink-0 align-[-0.125em]" />
                   </a>
                 )}
               </div>

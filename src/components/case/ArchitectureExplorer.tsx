@@ -2,6 +2,7 @@
 
 import { useRef, useState, type KeyboardEvent } from "react";
 import type { cs } from "@/lib/case-study";
+import { FiArrowRight } from "react-icons/fi";
 
 type Node = (typeof cs.architecture.nodes)[number];
 
@@ -55,7 +56,7 @@ export function ArchitectureExplorer({ nodes }: { nodes: readonly Node[] }) {
             aria-hidden
             className="pointer-events-none absolute left-full top-1/2 -translate-y-1/2 px-0.5 text-dim max-xl:hidden"
           >
-            →
+            <FiArrowRight className="size-4" />
           </span>
         )}
       </li>

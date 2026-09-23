@@ -1,6 +1,7 @@
 import { nav, site } from "@/lib/content";
 import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle";
+import { FiArrowUpRight } from "react-icons/fi";
 
 export function Nav() {
   return (
@@ -33,7 +34,7 @@ export function Nav() {
           rel="noopener noreferrer"
           className="hidden h-9 items-center gap-1.5 rounded-md border lg:inline-flex border-line bg-card px-3 text-sm font-medium text-ink transition-colors duration-200 hover:border-brand hover:bg-wash"
         >
-          Resume <span aria-hidden>↗</span>
+          Resume <FiArrowUpRight aria-hidden className="inline size-[1em] shrink-0 align-[-0.125em]" />
         </a>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { site } from "@/lib/content";
+import { FiArrowUpRight } from "react-icons/fi";
 
 /* Phones only: the two things a recruiter reaches for, always one tap away. */
 export function MobileBar() {
@@ -9,9 +10,9 @@ export function MobileBar() {
           href={site.resume}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex min-h-11 items-center justify-center rounded-xl border border-line bg-card text-sm font-medium"
+          className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-line bg-card text-sm font-medium"
         >
-          Resume ↗
+          Resume <FiArrowUpRight aria-hidden className="inline size-[1em] shrink-0 align-[-0.125em]" />
         </a>
         <a
           href={`mailto:${site.email}`}
