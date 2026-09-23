@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   },
   description: site.description,
   alternates: { canonical: "/" },
+  category: "portfolio",
+  applicationName: site.name,
+  referrer: "origin-when-cross-origin",
   keywords: [
     "Arjun L",
     "ArjunL",
@@ -54,6 +57,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: site.title,
     description: site.description,
+    creator: "@iamarjun23",
+  },
+  icons: {
+    icon: [{ url: "/icon", type: "image/png", sizes: "64x64" }],
   },
   // Set NEXT_PUBLIC_GOOGLE_VERIFICATION to the Search Console token to verify ownership.
   verification: { google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION },
@@ -78,7 +85,7 @@ const personSchema = {
   jobTitle: site.role,
   description: site.description,
   url: site.url,
-  email: `mailto:${site.email}`,
+  email: site.email,
   sameAs: [site.github, site.linkedin, site.company.url],
   address: { "@type": "PostalAddress", addressLocality: "Bangalore", addressCountry: "IN" },
   alumniOf: { "@type": "CollegeOrUniversity", name: "MSRUAS" },

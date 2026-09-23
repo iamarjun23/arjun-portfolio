@@ -9,22 +9,25 @@ export function Work() {
       title="Selected work"
       intro="Four products where I owned meaningful parts of the system, from repository to delivery."
     >
-      <ol className="grid gap-5">
+      <p className="-mt-5 mb-4 font-mono text-[11px] uppercase tracking-[0.08em] text-dim lg:hidden">Swipe for more →</p>
+      <ol className="flex snap-x snap-mandatory gap-3 overflow-x-auto [scrollbar-width:none] max-lg:-mx-6 max-lg:scroll-px-6 max-lg:px-6 lg:grid lg:gap-5 lg:overflow-visible">
         {projects.map((p, i) => {
           const rows = [
             ["Problem", p.problem],
             ["What I built", p.built],
             ["Outcome", p.outcome],
-            ["Stack", p.stack.join(" · ")],
           ].filter(([, text]) => text);
 
           return (
-            <li key={p.id} id={p.id} className="reveal scroll-mt-24 rounded-2xl border border-line bg-card p-[clamp(20px,3vw,36px)]">
-              <header className="flex flex-wrap items-start justify-between gap-x-8 gap-y-4 border-b border-line pb-6">
+            <li key={p.id} id={p.id} className="reveal w-[86%] shrink-0 snap-start scroll-mt-24 rounded-2xl border border-line bg-card p-[clamp(18px,3vw,36px)] sm:w-[70%] lg:w-auto">
+              <header className="flex flex-wrap items-start justify-between gap-x-8 gap-y-4 pb-6">
                 <div>
-                  <p className="font-mono text-xs text-dim">0{i + 1}</p>
-                  <h3 className="mt-1.5 text-[clamp(24px,2.4vw,32px)] font-semibold leading-tight tracking-[-0.035em]">{p.title}</h3>
-                  <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 text-[15px] text-muted">
+                  <p className="font-mono text-xs text-dim">
+                    0{i + 1}
+                    <span className="lg:hidden"> / 0{projects.length}</span>
+                  </p>
+                  <h3 className="mt-1.5 text-[clamp(20px,2.4vw,32px)] font-semibold leading-tight tracking-[-0.035em]">{p.title}</h3>
+                  <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted sm:text-[15px]">
                     <span>
                       {p.role} · {p.client} · {p.year}
                     </span>
@@ -52,10 +55,10 @@ export function Work() {
                 )}
               </header>
 
-              <dl className="divide-y divide-line">
+              <dl className="flex flex-col">
                 {rows.map(([label, text]) => (
-                  <div key={label} className="grid gap-1 py-4 last:pb-0 sm:grid-cols-[140px_1fr] sm:gap-6">
-                    <dt className="text-sm text-dim">{label}</dt>
+                  <div key={label} className={`${label === "Outcome" ? "max-sm:order-first max-sm:mb-2 max-sm:rounded-xl max-sm:border-0 max-sm:bg-wash max-sm:p-4 " : ""}grid gap-1.5 border-t border-line py-4 last:pb-0 sm:grid-cols-[140px_1fr] sm:gap-6`}>
+                    <dt className="font-mono text-[11px] uppercase tracking-[0.08em] text-dim sm:pt-0.5 sm:font-sans sm:text-sm sm:normal-case sm:tracking-normal">{label}</dt>
                     <dd
                       className={
                         label === "Outcome"
@@ -67,8 +70,8 @@ export function Work() {
                     </dd>
                   </div>
                 ))}
-                <div className="grid gap-1 py-4 last:pb-0 sm:grid-cols-[140px_1fr] sm:gap-6">
-                  <dt className="text-sm text-dim">Stack</dt>
+                <div className="grid gap-1.5 border-t border-line py-4 last:pb-0 sm:grid-cols-[140px_1fr] sm:gap-6">
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.08em] text-dim sm:pt-0.5 sm:font-sans sm:text-sm sm:normal-case sm:tracking-normal">Stack</dt>
                   <dd>
                     <ul className="flex flex-wrap gap-2">
                       {p.stack.map((s) => (

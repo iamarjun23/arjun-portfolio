@@ -3,21 +3,24 @@ import { Section } from "./Section";
 
 export function Experience() {
   return (
-    <Section id="experience" title="Experience" intro="Client product work, in-house tooling, and a mathematics and computing degree.">
+    <Section
+      id="experience"
+      title="Experience"
+      preview={experience.map((job) => job.org).join(" · ")} intro="Client product work, in-house tooling, and a mathematics and computing degree.">
       <ol className="relative ml-1.5 border-l border-line">
         {experience.map((job) => (
-          <li key={job.title} className="reveal relative pb-12 pl-8 last:pb-0 sm:pl-10">
+          <li key={job.title} className="reveal relative pb-10 pl-6 last:pb-0 sm:pb-12 sm:pl-10">
             <span
               aria-hidden
               className={`absolute -left-[7px] top-1.5 size-3.5 border-2 border-bg ${job.current ? "bg-brand" : "bg-line"}`}
             />
-            <div className="grid gap-3 md:grid-cols-12 md:gap-8">
-              <p className="text-sm text-dim md:col-span-3 md:pt-1">
+            <div className="grid gap-2 md:grid-cols-12 md:gap-8">
+              <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-dim md:col-span-3 md:pt-1 md:font-sans md:text-sm md:normal-case md:tracking-normal">
                 <time>{job.time}</time>
               </p>
               <div className="md:col-span-9">
                 <h3 className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                  <span className="text-2xl font-semibold tracking-[-0.03em]">{job.org}</span>
+                  <span className="text-lg font-semibold sm:text-2xl tracking-[-0.03em]">{job.org}</span>
                   {job.current && (
                     <span className="tag text-brand">Current</span>
                   )}

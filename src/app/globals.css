@@ -75,6 +75,11 @@
     /* Sticky header offset so anchor targets are not tucked under the nav. */
     scroll-padding-top: 5.5rem;
     -webkit-text-size-adjust: 100%;
+
+    /* Phones: 15px root scales every rem-based size and gap down together. */
+    @media (width < 640px) {
+      font-size: 93.75%;
+    }
   }
 
   body {
@@ -157,6 +162,13 @@
       animation-timeline: view();
       animation-range: entry 0% cover 18%;
     }
+  }
+}
+
+/* Fold: tap-to-open card on phones, plain always-open section from lg up. */
+@media (width >= 64rem) {
+  details.fold::details-content {
+    content-visibility: visible;
   }
 }
 

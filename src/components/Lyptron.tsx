@@ -1,18 +1,21 @@
 import { lyptron, site } from "@/lib/content";
+import { Fold } from "./Fold";
 
 export function Lyptron() {
   return (
-    <section id="lyptron" aria-labelledby="lyptron-heading" className="mt-[clamp(24px,4vw,48px)] border-y border-line bg-s1">
-      <div className="shell grid gap-12 py-[clamp(64px,8vw,120px)] lg:grid-cols-12 lg:gap-10">
+    <section id="lyptron" aria-labelledby="lyptron-heading" className="lg:mt-[clamp(24px,4vw,48px)] lg:border-y lg:border-line lg:bg-s1">
+      <div className="shell max-lg:py-1.5 lg:py-[clamp(64px,8vw,120px)]">
+      <Fold title="Lyptron" preview={`${lyptron.role} · Now`}>
+      <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
         <div className="reveal lg:col-span-5">
-          <p className="text-sm text-dim">Where I work now</p>
-          <h2 id="lyptron-heading" className="mt-3 text-[clamp(52px,6.4vw,96px)] leading-[0.95] font-semibold tracking-[-0.04em]">
+          <p className="text-sm text-dim max-lg:hidden">Where I work now</p>
+          <h2 id="lyptron-heading" className="mt-3 max-lg:sr-only text-[clamp(38px,6.4vw,96px)] leading-[0.95] font-semibold tracking-[-0.04em]">
             Lyptron
           </h2>
-          <p className="mt-5 text-lg text-ink">
+          <p className="text-base text-ink max-lg:hidden sm:text-lg lg:mt-5">
             {lyptron.role} <span className="text-dim">· {lyptron.since}</span>
           </p>
-          <p className="mt-4 max-w-[42ch] text-muted">{lyptron.pitch}</p>
+          <p className="max-w-[42ch] text-muted lg:mt-4">{lyptron.pitch}</p>
           <a
             href={site.company.url}
             target="_blank"
@@ -24,17 +27,17 @@ export function Lyptron() {
         </div>
 
         <div className="reveal lg:col-span-7">
-          <p className="max-w-[56ch] text-[clamp(21px,2vw,27px)] font-medium leading-snug tracking-[-0.02em] text-ink">{lyptron.body}</p>
+          <p className="max-w-[56ch] text-[clamp(17px,2vw,27px)] font-medium leading-snug tracking-[-0.02em] text-ink">{lyptron.body}</p>
 
           <h3 className="mt-12 text-sm text-dim">What I own</h3>
-          <ol className="mt-4 grid border-t border-line sm:grid-cols-2">
+          <ol className="mt-4 grid grid-cols-2 border-t border-line">
             {lyptron.owns.map((item, i) => (
-              <li key={item.title} className="border-b border-line py-5 sm:odd:border-r sm:odd:pr-6 sm:even:pl-6">
+              <li key={item.title} className="border-b border-line py-4 odd:border-r odd:pr-3 even:pl-3 sm:py-5 sm:odd:pr-6 sm:even:pl-6">
                 <p className="text-ink">
                   <span className="mr-2 text-dim">0{i + 1}</span>
                   {item.title}
                 </p>
-                <p className="mt-1 text-[15px] text-muted">{item.text}</p>
+                <p className="mt-1 text-sm text-muted sm:text-[15px]">{item.text}</p>
               </li>
             ))}
           </ol>
@@ -44,8 +47,8 @@ export function Lyptron() {
             {lyptron.shipped.map((p) => {
               const row = (
                 <>
-                  <span className="text-xl font-semibold tracking-[-0.02em] text-ink">{p.name}</span>
-                  <span className="text-right text-[15px] text-muted">
+                  <span className="text-lg font-semibold tracking-[-0.02em] text-ink sm:text-xl">{p.name}</span>
+                  <span className="text-right text-sm text-muted sm:text-[15px]">
                     {p.note}
                     {"href" in p && <span aria-hidden className="ml-2 text-dim transition-colors group-hover:text-brand">↓</span>}
                   </span>
@@ -65,6 +68,8 @@ export function Lyptron() {
             })}
           </ul>
         </div>
+      </div>
+      </Fold>
       </div>
     </section>
   );

@@ -8,7 +8,7 @@ const links = [
 
 export function Footer() {
   return (
-    <footer className="shell flex flex-wrap items-center justify-between gap-3 border-t border-line py-8 text-sm text-dim">
+    <footer className="shell flex flex-wrap items-center justify-between gap-3 border-t border-line py-8 text-sm text-dim max-lg:pb-28">
       <p>© {new Date().getFullYear()} {site.name}</p>
       <ul className="flex gap-4">
         {links.map((link) => (

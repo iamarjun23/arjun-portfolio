@@ -18,7 +18,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label="Toggle night mode"
-      className="grid size-9 place-items-center rounded-md border border-line text-muted transition-colors hover:border-brand hover:text-ink"
+      className="grid size-8 place-items-center md:size-9 rounded-md border border-line text-muted transition-colors hover:border-brand hover:text-ink"
     >
       <FiMoon aria-hidden className="theme-moon size-4" />
       <FiSun aria-hidden className="theme-sun size-4" />
